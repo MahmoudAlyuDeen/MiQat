@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MeeQat</string>
+    <string name="play_services_error">Google Play Services must be installed</string>
+    <string name="place_error">Something went wrong</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="geo_api_key">AIzaSyCUSRQAQCa5CmKPWe_VWdlArClGjQTXAZE</string>
+</resources>
