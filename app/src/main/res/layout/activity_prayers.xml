@@ -20,6 +20,8 @@
         android:id="@+id/prayers_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/dot_indicator_overlap_padding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.matthewtamlin.sliding_intro_screen_library.indicators.DotIndicator

@@ -33,7 +33,9 @@
         android:id="@+id/places_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:overScrollMode="ifContentScrolls"
+        android:paddingBottom="@dimen/fab_overlap_padding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
