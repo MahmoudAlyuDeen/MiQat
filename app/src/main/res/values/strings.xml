@@ -4,4 +4,7 @@
     <string name="place_error">Something went wrong</string>
     <string name="placeholder">Placeholder</string>
     <string name="geo_api_key">AIzaSyCUSRQAQCa5CmKPWe_VWdlArClGjQTXAZE</string>
+    <string name="place_loading_message">Getting timezone</string>
+    <string name="action_places">Places</string>
+    <string name="activity_title_places">Places</string>
 </resources>

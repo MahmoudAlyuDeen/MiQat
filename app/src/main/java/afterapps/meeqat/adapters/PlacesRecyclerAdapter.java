@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import afterapps.meeqat.R;
 import afterapps.meeqat.activities.ActivityPlaces;
@@ -63,8 +64,10 @@ public class PlacesRecyclerAdapter extends RealmRecyclerViewAdapter<RealmPlace, 
 
         @Override
         public void onClick(View view) {
-            if (getData() != null)
+            if (getData() != null) {
                 ((ActivityPlaces) context).handleRecyclerClick(getData().get(getLayoutPosition()).getId());
+                Toast.makeText(context, getData().get(getLayoutPosition()).getTimezone(), Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
