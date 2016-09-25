@@ -1,13 +1,13 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin"
-    tools:context="afterapps.meeqat.fragments.FragmentPrayersContent">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/test_text_view"
+    <include layout="@layout/prayers_day_title" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/prayers_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</FrameLayout>
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
+</LinearLayout>

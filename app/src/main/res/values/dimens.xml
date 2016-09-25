@@ -3,6 +3,11 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="dot_indicator_bottom_margin">8dp</dimen>
-    <dimen name="dot_indicator_overlap_padding">16dp</dimen>
     <dimen name="fab_overlap_padding">88dp</dimen>
+    <dimen name="text_size_next_prayer">34sp</dimen>
+    <dimen name="divider">0.5dp</dimen>
+
+    <dimen name="text_size_primary">16sp</dimen>
+    <dimen name="text_size_secondary">14sp</dimen>
+    <dimen name="divider_padding">72dp</dimen>
 </resources>

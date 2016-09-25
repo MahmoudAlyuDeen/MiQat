@@ -8,12 +8,12 @@ import io.realm.annotations.PrimaryKey;
  */
 public class RealmPlace extends RealmObject {
     @PrimaryKey
-    String id;
-    String name;
-    String timezone;
-    double longitude;
-    double latitude;
-    boolean active;
+    private String id;
+    private String name;
+    private String timezone;
+    private double longitude;
+    private double latitude;
+    private boolean active;
 
     public String getTimezone() {
         return timezone;

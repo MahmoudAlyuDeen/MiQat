@@ -3,7 +3,6 @@ package afterapps.meeqat.adapters;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import afterapps.meeqat.R;
-import afterapps.meeqat.activities.ActivityPlaces;
+import afterapps.meeqat.activities.ActivityLocations;
 import afterapps.meeqat.datamodel.RealmPlace;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,12 +42,11 @@ public class PlacesRecyclerAdapter extends RealmRecyclerViewAdapter<RealmPlace, 
                 holder.placesItemTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
             else
                 holder.placesItemTextView.setTextColor(ContextCompat.getColor(context, R.color.primary_text));
-            Log.e("Place", getData().get(position).getName() + " state: " + getData().get(position).isActive());
         }
     }
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder
+    class MyViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         @BindView(R.id.places_item_name_text_view)
@@ -56,7 +54,7 @@ public class PlacesRecyclerAdapter extends RealmRecyclerViewAdapter<RealmPlace, 
         @BindView(R.id.places_item_parent)
         View parent;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             parent.setOnClickListener(this);
@@ -65,7 +63,7 @@ public class PlacesRecyclerAdapter extends RealmRecyclerViewAdapter<RealmPlace, 
         @Override
         public void onClick(View view) {
             if (getData() != null) {
-                ((ActivityPlaces) context).handleRecyclerClick(getData().get(getLayoutPosition()).getId());
+                ((ActivityLocations) context).handleRecyclerClick(getData().get(getLayoutPosition()).getId());
                 Toast.makeText(context, getData().get(getLayoutPosition()).getTimezone(), Toast.LENGTH_LONG).show();
             }
         }

@@ -27,10 +27,12 @@ public class RetrofitClients {
 
         @GET(prayerTimesEndPoint)
         Call<PrayersResponse> getPrayerTimes(
-                @Query("latitude") String latitude,
-                @Query("longitude") String longitude,
+                @Query("latitude") double latitude,
+                @Query("longitude") double longitude,
                 @Query("timezonestring") String timezoneID,
-                @Query("method") int method
+                @Query("method") int method,
+                @Query("month") int month,
+                @Query("year") int year
         );
     }
 

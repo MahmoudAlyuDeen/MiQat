@@ -12,7 +12,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.ActivityPlaces"
+            android:name=".activities.ActivityLocations"
+            android:theme="@style/AppTheme"
             android:parentActivityName=".activities.ActivityPrayers" />
 
         <meta-data
@@ -21,6 +22,7 @@
 
         <activity
             android:name=".activities.ActivityPrayers"
+            android:theme="@style/AppTheme"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
