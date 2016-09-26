@@ -16,10 +16,10 @@
     <string name="shurouq">Shurouq</string>
     <string name="maghrib">Maghrib</string>
     <string name="isha">Isha\'a</string>
-    <string name="midnight">Midnight</string>
-    <string name="next_prayer_subtitle_text_view">Till %1$s</string>
+    <string name="next_prayer_subtitle_text_view">Till <b>%1$s</b></string>
     <string name="today_prayers_title">Today</string>
     <string name="tomorrow_prayers_title">Tomorrow</string>
-    <string name="anchor">0000</string>
+    <string name="mosque_anchor">0000</string>
     <string name="action_location">Location</string>
+    <string name="action_libraries">Open source libraries</string>
 </resources>

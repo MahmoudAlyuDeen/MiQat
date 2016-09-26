@@ -3,6 +3,7 @@ package afterapps.meeqat.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -11,11 +12,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.matthewtamlin.sliding_intro_screen_library.indicators.DotIndicator;
+import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
 import java.util.Calendar;
 import java.util.List;
@@ -57,6 +63,10 @@ public class ActivityPrayers extends AppCompatActivity {
     TextView nextPrayerSubtitleTextView;
     @BindView(R.id.next_prayer_view_group)
     View nextPrayer;
+    @BindView(R.id.animating_image_view)
+    ImageView animatingImageView;
+
+    boolean animated;
 
     private Handler mHandler;
 
@@ -87,7 +97,7 @@ public class ActivityPrayers extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         setTitle(R.string.app_name);
-        realm = Realm.getDefaultInstance();
+
         init();
     }
 
@@ -109,12 +119,54 @@ public class ActivityPrayers extends AppCompatActivity {
 
             }
         });
+        animated = false;
+        realm = Realm.getDefaultInstance();
+    }
+
+    private void animateIcon(RealmResults<RealmObjectPrayer> prayers) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        long now = calendar.getTimeInMillis();
+
+        prayers = prayers.where()
+                .equalTo("year", year)
+                .equalTo("month", month)
+                .equalTo("day", day).findAll();
+        RealmObjectPrayer fajr = prayers.where().equalTo("name", getString(R.string.shurouq)).findFirst();
+        RealmObjectPrayer maghrib = prayers.where().equalTo("name", getString(R.string.maghrib)).findFirst();
+        if (fajr != null && maghrib != null) {
+            animated = true;
+            long sunrise = fajr.getTimestamp();
+            long sunset = maghrib.getTimestamp();
+
+            IconicsDrawable timeIcon = new IconicsDrawable(this).sizeDp(48);
+            if (now <= sunrise) {
+                //midnight to sunrise
+                timeIcon.icon(WeatherIcons.Icon.wic_stars);
+            } else if (now >= sunset) {
+                //sunset to midnight
+                timeIcon.icon(WeatherIcons.Icon.wic_night_clear);
+            } else {
+                //sunrise to sunset
+                timeIcon.icon(WeatherIcons.Icon.wic_day_sunny);
+            }
+            timeIcon.color(Color.WHITE);
+            animatingImageView.setImageDrawable(timeIcon);
+
+            animatingImageView.animate()
+                    .alpha(1)
+                    .translationYBy(-150)
+                    .setDuration(1000)
+                    .setInterpolator(new AccelerateDecelerateInterpolator());
+        }
     }
 
     @Override
     protected void onStart() {
         refreshPrayersForCurrentPlace();
-        onResumePrayers();
+        onStartPrayers();
         super.onStart();
     }
 
@@ -144,7 +196,7 @@ public class ActivityPrayers extends AppCompatActivity {
         mHandler.removeCallbacks(mStatusChecker);
     }
 
-    private void onResumePrayers() {
+    private void onStartPrayers() {
         mHandler = new Handler();
         startRepeatingTask();
     }
@@ -154,15 +206,16 @@ public class ActivityPrayers extends AppCompatActivity {
         if (places.size() != 0) {
             RealmPlace activePlace = places.where().equalTo("active", true).findFirst();
             Calendar calendar = Calendar.getInstance();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
             RealmResults<RealmObjectPrayer> prayers = realm.where(RealmObjectPrayer.class)
                     .equalTo("place", activePlace.getId())
-                    .equalTo("year", year).equalTo("month", month).findAll();
+                    .findAll();
             if (prayers.size() == 0) {
                 hideNextPrayer();
                 showConnectionError();
             } else {
+                if (!animated) {
+                    animateIcon(prayers);
+                }
                 showNextPrayer();
                 hideConnectionError();
                 long now = calendar.getTimeInMillis();
@@ -242,6 +295,13 @@ public class ActivityPrayers extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
+            case R.id.action_libraries:
+                new LibsBuilder().withActivityTheme(R.style.AppTheme)
+                        .withAutoDetect(true)
+                        .withFields(R.string.class.getFields())
+                        .start(this);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -299,7 +359,7 @@ public class ActivityPrayers extends AppCompatActivity {
                     new Utilities.AddDataToRealm().execute(params);
                     hideProgress();
                     hideConnectionError();
-                    onResumePrayers();
+                    onStartPrayers();
                 }
             }
 

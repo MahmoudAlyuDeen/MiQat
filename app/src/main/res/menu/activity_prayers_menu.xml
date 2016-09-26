@@ -5,6 +5,11 @@
         android:id="@+id/action_location"
         android:icon="@drawable/ic_location"
         android:title="@string/action_location"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_libraries"
+        android:title="@string/action_libraries"
+        app:showAsAction="never" />
 
 </menu>

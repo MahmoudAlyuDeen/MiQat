@@ -1,6 +1,7 @@
 package afterapps.meeqat.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,8 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 import java.util.Calendar;
+
 import afterapps.meeqat.R;
 import afterapps.meeqat.adapters.PrayersRecyclerAdapter;
 import afterapps.meeqat.datamodel.RealmObjectPrayer;
@@ -25,11 +27,10 @@ public class FragmentPrayersContent extends Fragment {
     private static final String INSTANCE_INDEX_KEY = "instanceIndexKey";
 
     private int mIndex;
-    @BindView(R.id.prayers_day_text_view)
-    TextView prayerDayTextView;
     @BindView(R.id.prayers_recycler_view)
     RecyclerView prayersRecycler;
     Realm realm;
+    private Handler mHandler;
 
     public FragmentPrayersContent() {
 
@@ -68,27 +69,59 @@ public class FragmentPrayersContent extends Fragment {
 
     @Override
     public void onResume() {
+        mHandler = new Handler();
+        startRepeatingTask();
+
         init();
         super.onResume();
     }
 
+    @Override
+    public void onPause() {
+        stopRepeatingTask();
+        super.onPause();
+    }
+
     private void init() {
         RealmResults<RealmPlace> places = realm.where(RealmPlace.class).findAll();
-        if (places.size() == 0) {
-            showNoPlacesMessage();
-        } else {
+        if (places.size() != 0) {
             RealmPlace activePlace = places.where().equalTo("active", true).findFirst();
             displayPrayers(activePlace);
         }
     }
 
+    Runnable mStatusChecker = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                int currentSecond = Calendar.getInstance().get(Calendar.SECOND);
+                if (currentSecond == 0) {
+                    init();
+                }
+            } finally {
+                int mInterval = 1000;
+                mHandler.postDelayed(mStatusChecker, mInterval);
+            }
+        }
+    };
+
+    void startRepeatingTask() {
+        mStatusChecker.run();
+    }
+
+    void stopRepeatingTask() {
+        mHandler.removeCallbacks(mStatusChecker);
+    }
+
 
     private void displayPrayers(RealmPlace activePlace) {
         Calendar calendar = Calendar.getInstance();
+        long now = calendar.getTimeInMillis();
+        String dayString;
         if (mIndex == 0) {
-            prayerDayTextView.setText(getString(R.string.today_prayers_title));
+            dayString = getString(R.string.today_prayers_title);
         } else {
-            prayerDayTextView.setText(getString(R.string.tomorrow_prayers_title));
+            dayString = getString(R.string.tomorrow_prayers_title);
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
         int year = calendar.get(Calendar.YEAR);
@@ -103,18 +136,22 @@ public class FragmentPrayersContent extends Fragment {
 
         prayers = prayers.sort("timestamp", Sort.ASCENDING);
 
-        PrayersRecyclerAdapter prayersRecyclerAdapter = new PrayersRecyclerAdapter(getContext(), prayers);
+        RealmResults<RealmObjectPrayer> prayerRealmResults = realm.where(RealmObjectPrayer.class)
+                .equalTo("place", activePlace.getId()).findAll();
+        prayerRealmResults = prayerRealmResults.where().greaterThan("timestamp", now).findAll()
+                .sort("timestamp", Sort.ASCENDING);
+
+        RealmObjectPrayer nextPrayer = null;
+        if (prayerRealmResults.size() != 0) {
+            nextPrayer = prayerRealmResults.first();
+        }
+
+        PrayersRecyclerAdapter prayersRecyclerAdapter = new PrayersRecyclerAdapter(getContext(), prayers, dayString, nextPrayer, now);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
         prayersRecyclerAdapter.setHasStableIds(true);
         prayersRecycler.setLayoutManager(linearLayoutManager);
         prayersRecycler.setAdapter(prayersRecyclerAdapter);
 
-        }
-
-    private void showNoPlacesMessage() {
-        prayerDayTextView.setText(R.string.no_places_message);
     }
-
-
 }

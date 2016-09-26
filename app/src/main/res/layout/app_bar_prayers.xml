@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_prayers_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:titleTextColor="@color/app_bar_text">
+
+        <ProgressBar
+            android:id="@+id/prayers_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/fab_margin"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/prayers_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_error"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <LinearLayout
+            android:id="@+id/next_prayer_view_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/next_prayer_title_text_view"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="@string/app_bar_title"
+                android:textColor="@color/app_bar_text" />
+
+            <TextView
+                android:id="@+id/next_prayer_time_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_bar_text"
+                android:textSize="@dimen/text_size_next_prayer" />
+
+            <TextView
+                android:id="@+id/next_prayer_subtitle_text_view"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/app_bar_text" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mosque_anchor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mosque_anchor"
+            android:textColor="@color/mosque_anchor"
+            android:textSize="@dimen/text_size_next_prayer"
+            tools:ignore="RelativeOverlap" />
+
+
+
+        <LinearLayout
+            android:id="@+id/mosque_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/mosque_anchor"
+            android:layout_toRightOf="@id/mosque_anchor"
+            android:gravity="end">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@drawable/mosque_white"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/animating_image_view"
+            android:layout_width="48dp"
+            android:translationZ="-1dp"
+            android:layout_height="48dp"
+            android:alpha="0"
+            android:layout_alignBottom="@id/mosque_parent"
+            android:layout_alignEnd="@id/mosque_parent"
+            android:layout_alignRight="@id/mosque_parent"
+            android:layout_marginEnd="@dimen/divider_padding"
+            android:layout_marginRight="@dimen/divider_padding"
+            tools:ignore="ContentDescription"
+            tools:targetApi="lollipop" />
+
+    </RelativeLayout>
+
+</android.support.design.widget.AppBarLayout>

@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
-            android:src="@drawable/sun_asr"
             tools:ignore="ContentDescription" />
 
         <RelativeLayout

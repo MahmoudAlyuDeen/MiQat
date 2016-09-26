@@ -29,7 +29,7 @@ public class PlacesRecyclerAdapter extends RealmRecyclerViewAdapter<RealmPlace, 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.places_item, parent, false);
+                R.layout.item_places, parent, false);
         return new MyViewHolder(view);
     }
 

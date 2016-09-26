@@ -2,7 +2,9 @@ package afterapps.meeqat;
 
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.AsyncTask;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -39,6 +41,13 @@ public class Utilities {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timestamp);
         return format.format(calendar.getTime());
+    }
+
+    //converts a DP unit to pixels
+    public static float convertDpToPixel(float dp, Context context) {
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return dp * (metrics.densityDpi / 160f);
     }
 
 
