@@ -48,6 +48,20 @@
                 android:textSize="@dimen/text_size_primary" />
 
             <TextView
+                android:id="@+id/item_prayer_english_name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/item_prayer_name_text_view"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:ellipsize="middle"
+                android:fontFamily="sans-serif"
+                android:maxLines="1"
+                android:text="@string/placeholder"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/text_size_secondary" />
+
+            <TextView
                 android:id="@+id/item_prayer_time_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

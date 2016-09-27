@@ -31,6 +31,8 @@ public class FragmentPrayersContent extends Fragment {
     RecyclerView prayersRecycler;
     Realm realm;
     private Handler mHandler;
+    PrayersRecyclerAdapter prayersRecyclerAdapter;
+    RealmPlace activePlace;
 
     public FragmentPrayersContent() {
 
@@ -85,7 +87,7 @@ public class FragmentPrayersContent extends Fragment {
     private void init() {
         RealmResults<RealmPlace> places = realm.where(RealmPlace.class).findAll();
         if (places.size() != 0) {
-            RealmPlace activePlace = places.where().equalTo("active", true).findFirst();
+            activePlace = places.where().equalTo("active", true).findFirst();
             displayPrayers(activePlace);
         }
     }
@@ -94,16 +96,25 @@ public class FragmentPrayersContent extends Fragment {
         @Override
         public void run() {
             try {
-                int currentSecond = Calendar.getInstance().get(Calendar.SECOND);
-                if (currentSecond == 0) {
-                    init();
+                if (prayersRecyclerAdapter != null) {
+                    resendNextPrayer();
                 }
-            } finally {
+            } finally
+
+            {
                 int mInterval = 1000;
                 mHandler.postDelayed(mStatusChecker, mInterval);
             }
         }
     };
+
+    private void resendNextPrayer() {
+        if (activePlace != null) {
+            RealmObjectPrayer nextPrayer = getNextPrayer(activePlace);
+            if (nextPrayer != null)
+                prayersRecyclerAdapter.setNextPrayer(nextPrayer);
+        }
+    }
 
     void startRepeatingTask() {
         mStatusChecker.run();
@@ -133,9 +144,18 @@ public class FragmentPrayersContent extends Fragment {
                 .equalTo("year", year)
                 .equalTo("month", month)
                 .equalTo("day", day).findAll();
-
         prayers = prayers.sort("timestamp", Sort.ASCENDING);
 
+        prayersRecyclerAdapter = new PrayersRecyclerAdapter(getContext(), prayers, dayString, getNextPrayer(activePlace), now);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+
+        prayersRecyclerAdapter.setHasStableIds(true);
+        prayersRecycler.setLayoutManager(linearLayoutManager);
+        prayersRecycler.setAdapter(prayersRecyclerAdapter);
+    }
+
+    private RealmObjectPrayer getNextPrayer(RealmPlace activePlace) {
+        long now = Calendar.getInstance().getTimeInMillis();
         RealmResults<RealmObjectPrayer> prayerRealmResults = realm.where(RealmObjectPrayer.class)
                 .equalTo("place", activePlace.getId()).findAll();
         prayerRealmResults = prayerRealmResults.where().greaterThan("timestamp", now).findAll()
@@ -145,13 +165,6 @@ public class FragmentPrayersContent extends Fragment {
         if (prayerRealmResults.size() != 0) {
             nextPrayer = prayerRealmResults.first();
         }
-
-        PrayersRecyclerAdapter prayersRecyclerAdapter = new PrayersRecyclerAdapter(getContext(), prayers, dayString, nextPrayer, now);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-
-        prayersRecyclerAdapter.setHasStableIds(true);
-        prayersRecycler.setLayoutManager(linearLayoutManager);
-        prayersRecycler.setAdapter(prayersRecyclerAdapter);
-
+        return nextPrayer;
     }
 }

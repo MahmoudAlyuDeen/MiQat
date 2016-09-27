@@ -41,4 +41,5 @@ dependencies {
     }
     compile "com.mikepenz:iconics-core:2.8.1@aar"
     compile 'com.mikepenz:weather-icons-typeface:2.0.10.2@aar'
+    compile 'com.zsoltsafrany:needle:1.0.0'
 }

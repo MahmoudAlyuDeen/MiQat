@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/places_item_parent"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/places_item_name_text_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
+    android:gravity="center_vertical"
     android:minHeight="?attr/listPreferredItemHeight"
     android:paddingEnd="@dimen/activity_horizontal_margin"
-    android:paddingStart="@dimen/activity_horizontal_margin">
-    <!--todo: figure out why ripple doesn't show!-->
-
-    <TextView
-        android:id="@+id/places_item_name_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:text="@string/placeholder"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-</RelativeLayout>
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:text="@string/placeholder"
+    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />

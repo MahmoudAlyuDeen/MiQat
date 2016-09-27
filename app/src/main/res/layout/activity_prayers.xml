@@ -19,7 +19,22 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="@dimen/dot_indicator_bottom_margin"
         app:numberOfDots="2"
-        app:selectedDotColor="@color/colorPrimary"
-        app:unselectedDotColor="@color/colorPrimary" />
+        app:selectedDotColor="@color/colorAccent"
+        app:unselectedDotColor="@color/colorAccent" />
+
+    <include
+        android:id="@+id/no_places_message"
+        layout="@layout/no_places_message"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/no_prayers_message"
+        layout="@layout/no_prayers_error"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/prayers_progress"
+        layout="@layout/prayers_progress"
+        android:visibility="gone" />
 
 </android.support.design.widget.CoordinatorLayout>

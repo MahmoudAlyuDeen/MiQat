@@ -67,16 +67,19 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
             if (now > getData().get(position).getTimestamp()) {
                 holder.itemParent.setAlpha((float) 0.54);
             } else if (nextPrayer != null && prayer.getPrayerID() == nextPrayer.getPrayerID()) {
-                holder.prayerNameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
-                holder.prayerTimeTextView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
+                holder.prayerNameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+                holder.prayerEnglishNameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+                holder.prayerTimeTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
                 holder.prayerTimeTextView.setTypeface(null, Typeface.BOLD);
                 holder.prayerNameTextView.setTypeface(null, Typeface.BOLD);
+                holder.prayerEnglishNameTextView.setTypeface(null, Typeface.BOLD);
                 upNext = true;
             }
             if (holder.prayerDayTextView != null) {
                 holder.prayerDayTextView.setText(dayString);
             }
             holder.prayerNameTextView.setText(prayer.getName());
+            holder.prayerEnglishNameTextView.setText(prayer.getEnglishName());
             holder.prayerTimeTextView.setText(Utilities.getTimePretty(prayer.getTimestamp()));
             int index = prayer.getIndex();
 
@@ -102,7 +105,7 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
                     break;
             }
             if (upNext) {
-                prayerIcon.color(ContextCompat.getColor(context, R.color.colorPrimary));
+                prayerIcon.color(ContextCompat.getColor(context, R.color.colorAccent));
             } else {
                 prayerIcon.color(Color.BLACK);
             }
@@ -110,9 +113,19 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
         }
     }
 
+    public void setNextPrayer(RealmObjectPrayer nextPrayer) {
+        RealmObjectPrayer old = this.nextPrayer;
+        if (this.nextPrayer == null || nextPrayer.getPrayerID() != old.getPrayerID()) {
+            this.nextPrayer = nextPrayer;
+            notifyDataSetChanged();
+        }
+    }
+
     class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_prayer_name_text_view)
         TextView prayerNameTextView;
+        @BindView(R.id.item_prayer_english_name_text_view)
+        TextView prayerEnglishNameTextView;
         @BindView(R.id.item_prayer_time_text_view)
         TextView prayerTimeTextView;
         @BindView(R.id.prayer_icon_image_view)

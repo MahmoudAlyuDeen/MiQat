@@ -165,7 +165,6 @@ public class ActivityLocations extends AppCompatActivity {
         realm.beginTransaction();
         RealmPlace place = realm.where(RealmPlace.class).equalTo("id", id).findFirst();
         place.setActive(true);
-        Log.d("activatePlace", place.getName() + " state: " + place.isActive());
         realm.copyToRealmOrUpdate(place);
         realm.commitTransaction();
     }
@@ -205,7 +204,6 @@ public class ActivityLocations extends AppCompatActivity {
                 hideProgress();
                 Log.d(GEO_LOG_TAG, "response");
                 if (response.isSuccessful()) {
-                    Log.d(GEO_LOG_TAG, "success" + response.body().getTimeZoneId());
                     addPlaceToRealm(place, response.body());
                 }
             }

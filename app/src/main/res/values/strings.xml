@@ -6,20 +6,30 @@
     <string name="geo_api_key">AIzaSyCUSRQAQCa5CmKPWe_VWdlArClGjQTXAZE</string>
     <string name="place_loading_message">Getting timezone</string>
     <string name="activity_title_location">Location</string>
-    <string name="no_places_message">Add your city to show prayer timings</string>
+    <string name="no_places_message">Welcome to MeeQat\n
+    Add your city to show prayer timings</string>
     <string name="perf_prayers_method_key">perf_prayer_method_key</string>
     <string name="app_bar_title">You have</string>
     <string name="no_timings_message">Can\'t load prayer timings; you might be offline!</string>
     <string name="fajr">Fajr</string>
+    <string name="shurouq">Shurouq</string>
     <string name="dhuhr">Dduhr</string>
     <string name="asr">Asr</string>
-    <string name="shurouq">Shurouq</string>
     <string name="maghrib">Maghrib</string>
     <string name="isha">Isha\'a</string>
+    <string name="dawn">The dawn prayer</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="noon">The noon prayer</string>
+    <string name="afternoon">The Afternoon prayer</string>
+    <string name="sunset">The sunset prayer</string>
+    <string name="night">The night prayer</string>
     <string name="next_prayer_subtitle_text_view">Till <b>%1$s</b></string>
     <string name="today_prayers_title">Today</string>
     <string name="tomorrow_prayers_title">Tomorrow</string>
     <string name="mosque_anchor">0000</string>
     <string name="action_location">Location</string>
     <string name="action_libraries">Open source libraries</string>
+    <string name="no_prayers_message">Can\'t connect to prayers server\nTouch to retry!</string>
+    <string name="action_retry">Retry</string>
+    <string name="last_animated_key">lastAnimatedKey</string>
 </resources>

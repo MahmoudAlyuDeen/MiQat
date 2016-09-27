@@ -141,6 +141,7 @@
     <orderEntry type="library" exported="" name="realm-android-library-1.2.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-maps-9.4.0" level="project" />
     <orderEntry type="library" exported="" name="android-adapters-1.3.0" level="project" />
+    <orderEntry type="library" exported="" name="needle-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-24.2.0" level="project" />
     <orderEntry type="library" exported="" name="design-24.2.1" level="project" />
     <orderEntry type="library" exported="" name="support-media-compat-24.2.1" level="project" />

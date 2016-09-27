@@ -1,5 +1,7 @@
 package afterapps.meeqat.activities;
 
+import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +11,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,8 +58,10 @@ public class ActivityPrayers extends AppCompatActivity {
     DotIndicator dotIndicator;
     @BindView(R.id.prayers_progress)
     View prayersProgress;
-    @BindView(R.id.prayers_error)
-    View prayersError;
+    @BindView(R.id.no_places_message)
+    View noPlacesMessage;
+    @BindView(R.id.no_prayers_message)
+    View noPrayersMessage;
     @BindView(R.id.next_prayer_time_text_view)
     TextView nextPrayerTimeTextView;
     @BindView(R.id.next_prayer_subtitle_text_view)
@@ -66,7 +71,9 @@ public class ActivityPrayers extends AppCompatActivity {
     @BindView(R.id.animating_image_view)
     ImageView animatingImageView;
 
-    boolean animated;
+    private boolean animated;
+    private boolean animatedAgain;
+
 
     private Handler mHandler;
 
@@ -75,7 +82,6 @@ public class ActivityPrayers extends AppCompatActivity {
     Call<PrayersResponse> nextMonthPrayerCall;
     Call<PrayersResponse> currentMonthPrayerCall;
     RetrofitClients.PrayerTimesClient prayerTimesClient;
-
 
     @Override
     public void onDestroy() {
@@ -120,46 +126,95 @@ public class ActivityPrayers extends AppCompatActivity {
             }
         });
         animated = false;
+        animatedAgain = true;
         realm = Realm.getDefaultInstance();
+        setupRetryListener();
     }
 
-    private void animateIcon(RealmResults<RealmObjectPrayer> prayers) {
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        long now = calendar.getTimeInMillis();
-
-        prayers = prayers.where()
-                .equalTo("year", year)
-                .equalTo("month", month)
-                .equalTo("day", day).findAll();
-        RealmObjectPrayer fajr = prayers.where().equalTo("name", getString(R.string.shurouq)).findFirst();
-        RealmObjectPrayer maghrib = prayers.where().equalTo("name", getString(R.string.maghrib)).findFirst();
-        if (fajr != null && maghrib != null) {
-            animated = true;
-            long sunrise = fajr.getTimestamp();
-            long sunset = maghrib.getTimestamp();
-
-            IconicsDrawable timeIcon = new IconicsDrawable(this).sizeDp(48);
-            if (now <= sunrise) {
-                //midnight to sunrise
-                timeIcon.icon(WeatherIcons.Icon.wic_stars);
-            } else if (now >= sunset) {
-                //sunset to midnight
-                timeIcon.icon(WeatherIcons.Icon.wic_night_clear);
-            } else {
-                //sunrise to sunset
-                timeIcon.icon(WeatherIcons.Icon.wic_day_sunny);
+    private void setupRetryListener() {
+        noPrayersMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refreshPrayersForCurrentPlace();
             }
-            timeIcon.color(Color.WHITE);
-            animatingImageView.setImageDrawable(timeIcon);
+        });
+    }
 
+    @SuppressLint("CommitPrefEdits")
+    private void animateIcon(boolean repeat) {
+        Log.d("j", "animateIcon: " + repeat);
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        final long lastAnimated = sharedPref.getLong(getString(R.string.last_animated_key), 0);
+        long now = Calendar.getInstance().getTimeInMillis();
+        long delta = now - lastAnimated;
+
+
+        if (repeat) {
+            if (delta > 2000) {
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putLong(getString(R.string.last_animated_key), now);
+                editor.commit();
+
+                animatingImageView.animate()
+                        .alpha(0)
+                        .translationYBy(150)
+                        .setDuration(0).setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animator) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        animatingImageView.animate()
+                                .alpha(1)
+                                .translationYBy(-150)
+                                .setDuration(1000)
+                                .setInterpolator(new AccelerateDecelerateInterpolator()).setListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animator) {
+
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animator animator) {
+                                animator.cancel();
+                            }
+
+                            @Override
+                            public void onAnimationCancel(Animator animator) {
+
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animator animator) {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animator) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animator) {
+
+                    }
+                });
+            }
+        } else {
             animatingImageView.animate()
                     .alpha(1)
                     .translationYBy(-150)
                     .setDuration(1000)
                     .setInterpolator(new AccelerateDecelerateInterpolator());
+
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putLong(getString(R.string.last_animated_key), now);
+            editor.commit();
         }
     }
 
@@ -173,7 +228,14 @@ public class ActivityPrayers extends AppCompatActivity {
     @Override
     protected void onStop() {
         stopRepeatingTask();
+        animatedAgain = false;
         super.onStop();
+    }
+
+    @Override
+    protected void onRestart() {
+        animatedAgain = false;
+        super.onRestart();
     }
 
     Runnable mStatusChecker = new Runnable() {
@@ -206,19 +268,21 @@ public class ActivityPrayers extends AppCompatActivity {
         if (places.size() != 0) {
             RealmPlace activePlace = places.where().equalTo("active", true).findFirst();
             Calendar calendar = Calendar.getInstance();
+            long now = calendar.getTimeInMillis();
+            long range = now + (1000 * 60 * 60 * 24 * 2);
             RealmResults<RealmObjectPrayer> prayers = realm.where(RealmObjectPrayer.class)
                     .equalTo("place", activePlace.getId())
+                    .lessThan("timestamp", range)
                     .findAll();
             if (prayers.size() == 0) {
                 hideNextPrayer();
-                showConnectionError();
+                hidePrayers();
             } else {
-                if (!animated) {
-                    animateIcon(prayers);
-                }
+                displayProperIcon(prayers);
+                showPrayers();
                 showNextPrayer();
+                hideNoPlacesMessage();
                 hideConnectionError();
-                long now = calendar.getTimeInMillis();
                 prayers = prayers.where().greaterThan("timestamp", now).findAll().sort("timestamp", Sort.ASCENDING);
                 if (prayers.size() != 0) {
                     RealmObjectPrayer nextPrayer = prayers.first();
@@ -229,7 +293,68 @@ public class ActivityPrayers extends AppCompatActivity {
             }
         } else {
             hideNextPrayer();
-            showConnectionError();
+            hidePrayers();
+            hideConnectionError();
+            showNoPlacesMessage();
+        }
+    }
+
+    private void showPrayers() {
+        prayersViewPager.setVisibility(View.VISIBLE);
+        dotIndicator.setVisibility(View.VISIBLE);
+    }
+
+    private void showNoPlacesMessage() {
+        noPlacesMessage.setVisibility(View.VISIBLE);
+    }
+
+    private void hideNoPlacesMessage() {
+        noPlacesMessage.setVisibility(View.GONE);
+    }
+
+    private void hidePrayers() {
+        prayersViewPager.setVisibility(View.GONE);
+        dotIndicator.setVisibility(View.GONE);
+    }
+
+    private void displayProperIcon(RealmResults<RealmObjectPrayer> prayers) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        long now = calendar.getTimeInMillis();
+
+        prayers = prayers.where()
+                .equalTo("year", year)
+                .equalTo("month", month)
+                .equalTo("day", day).findAll();
+        RealmObjectPrayer fajr = prayers.where().equalTo("name", getString(R.string.shurouq)).findFirst();
+        RealmObjectPrayer maghrib = prayers.where().equalTo("name", getString(R.string.maghrib)).findFirst();
+        if (fajr != null && maghrib != null) {
+            long sunrise = fajr.getTimestamp();
+            long sunset = maghrib.getTimestamp();
+
+            IconicsDrawable timeIcon = new IconicsDrawable(this).sizeDp(48);
+            if (now < sunrise) {
+                //midnight to sunrise
+                timeIcon.icon(WeatherIcons.Icon.wic_stars);
+            } else if (now > sunset) {
+                //sunset to midnight
+                timeIcon.icon(WeatherIcons.Icon.wic_night_clear);
+            } else {
+                //sunrise to sunset
+                timeIcon.icon(WeatherIcons.Icon.wic_day_sunny);
+            }
+            timeIcon.color(Color.WHITE);
+            animatingImageView.setImageDrawable(timeIcon);
+
+            if (!animated) {
+                animated = true;
+                animateIcon(false);
+            } else if (!animatedAgain) {
+                animatedAgain = true;
+                animateIcon(true);
+            }
         }
     }
 
@@ -284,6 +409,14 @@ public class ActivityPrayers extends AppCompatActivity {
 
     private void hideProgress() {
         prayersProgress.setVisibility(View.GONE);
+    }
+
+    private void showConnectionError() {
+        noPrayersMessage.setVisibility(View.VISIBLE);
+    }
+
+    private void hideConnectionError() {
+        noPrayersMessage.setVisibility(View.GONE);
     }
 
     @Override
@@ -355,11 +488,9 @@ public class ActivityPrayers extends AppCompatActivity {
             public void onResponse(Call<PrayersResponse> call, Response<PrayersResponse> response) {
                 if (response.isSuccessful() && !call.isCanceled()) {
                     List<Day> days = response.body().getDays();
-                    AsyncTaskParams params = new AsyncTaskParams(days, activePlace.getId(), ActivityPrayers.this);
-                    new Utilities.AddDataToRealm().execute(params);
+                    Utilities.addDataToRealm(days, activePlace.getId(), ActivityPrayers.this);
                     hideProgress();
                     hideConnectionError();
-                    onStartPrayers();
                 }
             }
 
@@ -371,26 +502,5 @@ public class ActivityPrayers extends AppCompatActivity {
                 }
             }
         };
-    }
-
-    private void showConnectionError() {
-        prayersError.setVisibility(View.VISIBLE);
-    }
-
-    private void hideConnectionError() {
-        prayersError.setVisibility(View.GONE);
-    }
-
-
-    public static class AsyncTaskParams {
-        public List<Day> days;
-        public String activePlace;
-        public Context context;
-
-        AsyncTaskParams(List<Day> days, String activePlace, Context context) {
-            this.activePlace = activePlace;
-            this.days = days;
-            this.context = context;
-        }
     }
 }

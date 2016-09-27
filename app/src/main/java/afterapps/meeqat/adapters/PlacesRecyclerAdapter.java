@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import afterapps.meeqat.R;
 import afterapps.meeqat.activities.ActivityLocations;
@@ -51,20 +50,17 @@ public class PlacesRecyclerAdapter extends RealmRecyclerViewAdapter<RealmPlace, 
 
         @BindView(R.id.places_item_name_text_view)
         TextView placesItemTextView;
-        @BindView(R.id.places_item_parent)
-        View parent;
 
         MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            parent.setOnClickListener(this);
+            placesItemTextView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (getData() != null) {
                 ((ActivityLocations) context).handleRecyclerClick(getData().get(getLayoutPosition()).getId());
-                Toast.makeText(context, getData().get(getLayoutPosition()).getTimezone(), Toast.LENGTH_LONG).show();
             }
         }
     }

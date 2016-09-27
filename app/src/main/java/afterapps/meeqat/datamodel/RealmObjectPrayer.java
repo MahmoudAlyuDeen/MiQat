@@ -9,6 +9,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class RealmObjectPrayer extends RealmObject {
     private String name;
+    private String englishName;
     private long timestamp;
     private String place;
     private int year;
@@ -17,6 +18,14 @@ public class RealmObjectPrayer extends RealmObject {
     private int index;
     @PrimaryKey
     private long prayerID;
+
+    public String getEnglishName() {
+        return englishName;
+    }
+
+    public void setEnglishName(String englishName) {
+        this.englishName = englishName;
+    }
 
     public int getIndex() {
         return index;
