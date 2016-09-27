@@ -19,7 +19,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-return void
+    return void
 }
 
 dependencies {
@@ -42,4 +42,5 @@ dependencies {
     compile "com.mikepenz:iconics-core:2.8.1@aar"
     compile 'com.mikepenz:weather-icons-typeface:2.0.10.2@aar'
     compile 'com.zsoltsafrany:needle:1.0.0'
+    compile 'com.mikepenz:fontawesome-typeface:4.6.0.3@aar'
 }

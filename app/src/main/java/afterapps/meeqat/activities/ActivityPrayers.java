@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.matthewtamlin.sliding_intro_screen_library.indicators.DotIndicator;
 import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
@@ -340,7 +341,7 @@ public class ActivityPrayers extends AppCompatActivity {
                 timeIcon.icon(WeatherIcons.Icon.wic_stars);
             } else if (now > sunset) {
                 //sunset to midnight
-                timeIcon.icon(WeatherIcons.Icon.wic_night_clear);
+                timeIcon.icon(FontAwesome.Icon.faw_moon_o);
             } else {
                 //sunrise to sunset
                 timeIcon.icon(WeatherIcons.Icon.wic_day_sunny);

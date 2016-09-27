@@ -13,7 +13,7 @@
     <string name="no_timings_message">Can\'t load prayer timings; you might be offline!</string>
     <string name="fajr">Fajr</string>
     <string name="shurouq">Shurouq</string>
-    <string name="dhuhr">Dduhr</string>
+    <string name="dhuhr">Dhuhr</string>
     <string name="asr">Asr</string>
     <string name="maghrib">Maghrib</string>
     <string name="isha">Isha\'a</string>

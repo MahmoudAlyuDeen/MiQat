@@ -10,6 +10,7 @@
         android:id="@+id/activity_prayers_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        app:layout_scrollFlags="scroll|enterAlways"
         app:titleTextColor="@color/app_bar_main_text">
 
     </android.support.v7.widget.Toolbar>

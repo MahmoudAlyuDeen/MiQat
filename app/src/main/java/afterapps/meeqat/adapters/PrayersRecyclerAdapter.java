@@ -12,12 +12,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
+
+import java.util.Calendar;
 
 import afterapps.meeqat.R;
 import afterapps.meeqat.Utilities;
 import afterapps.meeqat.datamodel.RealmObjectPrayer;
+import afterapps.meeqat.fragments.FragmentPrayersContent;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.OrderedRealmCollection;
@@ -33,12 +37,14 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
     private String dayString;
     private long now;
     private RealmObjectPrayer nextPrayer;
+    private FragmentPrayersContent fragment;
 
-    public PrayersRecyclerAdapter(Context context, OrderedRealmCollection<RealmObjectPrayer> data, String dayString, RealmObjectPrayer nextPrayer, long now) {
+    public PrayersRecyclerAdapter(Context context, OrderedRealmCollection<RealmObjectPrayer> data, String dayString, RealmObjectPrayer nextPrayer, long now, FragmentPrayersContent fragmentPrayersContent) {
         super(context, data, true);
         this.dayString = dayString;
         this.now = now;
         this.nextPrayer = nextPrayer;
+        this.fragment = fragmentPrayersContent;
     }
 
     @Override
@@ -101,7 +107,7 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
                     prayerIcon.icon(WeatherIcons.Icon.wic_sunset);
                     break;
                 case 5:
-                    prayerIcon.icon(WeatherIcons.Icon.wic_night_clear);
+                    prayerIcon.icon(FontAwesome.Icon.faw_moon_o);
                     break;
             }
             if (upNext) {
@@ -115,9 +121,10 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
 
     public void setNextPrayer(RealmObjectPrayer nextPrayer) {
         RealmObjectPrayer old = this.nextPrayer;
+        this.now = Calendar.getInstance().getTimeInMillis();
         if (this.nextPrayer == null || nextPrayer.getPrayerID() != old.getPrayerID()) {
             this.nextPrayer = nextPrayer;
-            notifyDataSetChanged();
+            fragment.invalidatePrayers();
         }
     }
 

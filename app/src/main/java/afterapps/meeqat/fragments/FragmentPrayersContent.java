@@ -146,7 +146,7 @@ public class FragmentPrayersContent extends Fragment {
                 .equalTo("day", day).findAll();
         prayers = prayers.sort("timestamp", Sort.ASCENDING);
 
-        prayersRecyclerAdapter = new PrayersRecyclerAdapter(getContext(), prayers, dayString, getNextPrayer(activePlace), now);
+        prayersRecyclerAdapter = new PrayersRecyclerAdapter(getContext(), prayers, dayString, getNextPrayer(activePlace), now, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
         prayersRecyclerAdapter.setHasStableIds(true);
@@ -166,5 +166,9 @@ public class FragmentPrayersContent extends Fragment {
             nextPrayer = prayerRealmResults.first();
         }
         return nextPrayer;
+    }
+
+    public void invalidatePrayers() {
+        init();
     }
 }
