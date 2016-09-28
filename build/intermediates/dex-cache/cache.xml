@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.jakewharton\butterknife\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="a07818a1ecabdb149998823429cce555af4b9cba">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.jakewharton-butterknife-8.4.0_65e4ee2ad656f28481d604254e981fa8a859708b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-24.2.1_a791a8fdb92cd8670da6f3c5195d45c0d37e35a1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-design-24.2.1_e943defc411a43a14f23cc4f4f53d52302284369.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-24.2.1_1a0e372f2b1f188a0fd38b80d40c21b5f4b2df7f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.mikepenz\weather-icons-typeface\2.0.10.2\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="9c713ae496579f49b644dbc959a9cee33d0be786">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.mikepenz-weather-icons-typeface-2.0.10.2_12878451869bf41dad03fb7f45bd61bf62c407dc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="8a36d229011e75f0caef408e1adf0d3fd4d94e02">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-tasks-9.4.0_23c2cad78e1c083acc083037e3f890d43712f839.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.mikepenz\fontawesome-typeface\4.6.0.3\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="85df25d7afb26b40d1eaaa7382238bb3cb95591c">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.mikepenz-fontawesome-typeface-4.6.0.3_3d902dae193916c0367a3408bc1d501e934a9cd1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="618485fef3ebe12127f7622abbc9b5b39057b5c2">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-9.4.0_f0eeeecd17134b4c20f8ea8b2211171fec614f03.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_8e53c32317874ba5f0032e35238e46a10cc64e86.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mahmoud\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\converter-gson-2.1.0_5a8838908b19fa70e01f5822ed884a492b896bda.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mahmoud\.gradle\caches\modules-2\files-2.1\com.zsoltsafrany\needle\1.0.0\e4cf07fb0304459555cffa4c18f59276bb3e7867\needle-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="e4cf07fb0304459555cffa4c18f59276bb3e7867">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\needle-1.0.0_95aa4e07381974a274321edef2bc98fa3e35c054.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mahmoud\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.4.0\ea392375cf9ff59234a82e7928a204215ccc98cd\butterknife-annotations-8.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="ea392375cf9ff59234a82e7928a204215ccc98cd">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\butterknife-annotations-8.4.0_63e394b9c81253013e73fcff453373cf9438d40e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-24.2.1_d547e7c7d404e4560576bcd2b2ecef2d0ed12195.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-24.2.1_65b8921d1da2575b871aecc5d2c8b74bcbd492ee.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_c5462dad1f3cce3eac9e98e50d8b2aa989319f68.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mahmoud\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.8.0\5ea7af56cc7c567ed9856d99efb30740e9b17ff\okio-1.8.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\okio-1.8.0_a001c8b6d8dba310a45730188e77df200f64b114.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.matthew-tamlin\android-utilities\2.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="1ede4889451e2ca66ef5a90668e2448712084476">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.matthew-tamlin-android-utilities-2.1.0_31fc335ec8b0e88a76eb2694e61121f9c9351568.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-24.2.1_f32406a8e2a961049723001224313169b70f36bc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mahmoud\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.0\2b802460eea20f8f2ad9c08c74e0f14718e88aa9\okhttp-3.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="2b802460eea20f8f2ad9c08c74e0f14718e88aa9">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\okhttp-3.3.0_0a3ab1ffae61edd0b0e3c421b3a3916f11ab0b41.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-24.2.1_1e5162b31eed910b5870bd977f75217dd443682e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mahmoud\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.1.0\2de7cd8b95b7021b1d597f049bcb422055119f2c\retrofit-2.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\retrofit-2.1.0_72c516bfb8b64c6ca63206eaa81615fbf4afc28e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_623cb4c2087c72bd38484c44aa2b7146311ce343.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="96e33a7aaee00ab64270e2a9887b8f9ef32c8b73">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-cardview-v7-24.2.0_9bc837a5895aea39191920c42332bcc68d14ab8b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.matthew-tamlin\sliding-intro-screen\3.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="74de645cef9a04c518b9f994914d8f7f3921ecf5">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.matthew-tamlin-sliding-intro-screen-3.2.0_23e2c353041306956d32c0eb17be3331ce62bd78.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.getkeepsafe.relinker\relinker\1.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="264f0bc4c0680cfe7a60fea1f12a43f1ab48e7c8">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.getkeepsafe.relinker-relinker-1.2.1_dd92aa541faa7c35b31780ef2e6f90c48c4dbe73.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\io.realm\realm-android-library\1.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="15a3e65c92d3cde64c725dba8d590a1123d2d213">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\io.realm-realm-android-library-1.2.0_e631ed6da85b05e95bf3930557312d605d40ea7c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="3dee4ce5844d39d843d503fb8fe04e51e5bfffac">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-9.4.0_af18d842d5ca94a3cd12a7ff96d2b2f0d061b59f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.mikepenz\fastadapter\1.8.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="21752cbe99942598e0b554b84e79b7c8d6f172f2">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.mikepenz-fastadapter-1.8.0_87ed0fcf22839a572ec8b67cb776dd50be5e21a9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mahmoud\.gradle\caches\modules-2\files-2.1\io.realm\realm-annotations\1.2.0\5e4042f9e0d39e0d01d4a8661d01e24995b2cbef\realm-annotations-1.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="5e4042f9e0d39e0d01d4a8661d01e24995b2cbef">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\realm-annotations-1.2.0_59f21355d64217843c2bbf25db2755042c9238d6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\SDK\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\support-annotations-24.2.1_ade36c09ab525d8c854ff59e9b6dbaf68459a6d5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.mikepenz\iconics-core\2.8.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="9f910ce4152cf5b205ee2630dc2e12d2803e1e63">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.mikepenz-iconics-core-2.8.1_f6a8ef0600e09cd96623b7dbb1964e565f701043.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\io.realm\android-adapters\1.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="821de897b9350f9cb17f5f195a59dcf454bdba3d">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\io.realm-android-adapters-1.3.0_95aa93f5951f87beaee8c74e48d3df57fe3d780c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-24.2.1_b62679c8ea0f13445c8a2f3f6d6cc70898fb9e43.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-24.2.1_2ab42d87fb83b9beb5a62ff528a92280397d589c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_a23f8e25b9fc20e229377f658144e9bf4b2e3279.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.mikepenz\aboutlibraries\5.8.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="8b2d14cc00486dcf0416eea1bc76a7c8475f5d81">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.mikepenz-aboutlibraries-5.8.1_ed61d641fdd71da6957c858311e22b76a9a2e048.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_014a199b16190a690547826d5f258f4cbe3f4534.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.2.1_3387925c89a9ef1ae12a3861c2223eb985d76f11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-24.2.1_7c38fd1ba77e44aa6299e710d57d2f37ab473945.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Mahmoud\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\gson-2.7_4f57c164a0bff4f0f62d519dea25a22126cb3572.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-places\9.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="e35002351f2d415093a9b564652d4b56be6a0593">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-places-9.4.0_f45c7f8a77e11eb297147771372f756a92398d60.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="e454c414a069241ee08444d187f2dd3a702596b5">
+        <dex dex="E:\AndroidJune6th\Projects\MeeQat\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-maps-9.4.0_99c65fe07e4030ec5d446bfdb533fea038d1191e.jar" />
+    </item>
+
+</items>
