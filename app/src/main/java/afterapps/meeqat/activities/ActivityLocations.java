@@ -2,14 +2,16 @@ package afterapps.meeqat.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.AutocompleteFilter;
@@ -17,7 +19,9 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import java.util.Calendar;
+
 import afterapps.meeqat.R;
 import afterapps.meeqat.adapters.PlacesRecyclerAdapter;
 import afterapps.meeqat.datamodel.RealmPlace;
@@ -45,8 +49,6 @@ public class ActivityLocations extends AppCompatActivity {
     View placeProgress;
     @BindView(R.id.activity_places_toolbar)
     Toolbar toolbar;
-    @BindView(R.id.places_fab)
-    FloatingActionButton placesFab;
 
     RetrofitClients.ReverseGeoClient reverseGeoClient;
     Call<ReverseGeoResponse> reverseGeoCall;
@@ -72,27 +74,8 @@ public class ActivityLocations extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initPlacesRecycler();
-        initFab();
     }
 
-    private void initFab() {
-        placesFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    AutocompleteFilter autocompleteFilter = new AutocompleteFilter.Builder()
-                            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES).build();
-                    Intent intent =
-                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
-                                    .setFilter(autocompleteFilter)
-                                    .build(ActivityLocations.this);
-                    startActivityForResult(intent, PLACES_FAB_FLAG);
-                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
-                    Snackbar.make(parent, R.string.play_services_error, Snackbar.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
 
     @Override
     protected void onDestroy() {
@@ -111,6 +94,36 @@ public class ActivityLocations extends AppCompatActivity {
         placesRecyclerAdapter.setHasStableIds(true);
         placesRecycler.setLayoutManager(new LinearLayoutManager(this));
         placesRecycler.setAdapter(placesRecyclerAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_locations_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_add:
+                try {
+                    AutocompleteFilter autocompleteFilter = new AutocompleteFilter.Builder()
+                            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES).build();
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+                                    .setFilter(autocompleteFilter)
+                                    .build(ActivityLocations.this);
+                    startActivityForResult(intent, PLACES_FAB_FLAG);
+                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+                    Snackbar.make(parent, R.string.play_services_error, Snackbar.LENGTH_LONG).show();
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     @Override
@@ -167,6 +180,7 @@ public class ActivityLocations extends AppCompatActivity {
         place.setActive(true);
         realm.copyToRealmOrUpdate(place);
         realm.commitTransaction();
+        finish();
     }
 
     public void handleRecyclerClick(String id) {
@@ -174,7 +188,6 @@ public class ActivityLocations extends AppCompatActivity {
     }
 
     private void getTimezone(Place place) {
-        //initializing Retrofit
         final String BASE_URL = "https://maps.googleapis.com/";
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
@@ -215,4 +228,14 @@ public class ActivityLocations extends AppCompatActivity {
         };
     }
 
+    public void handleDeletionClick(String placeID) {
+        places = realm.where(RealmPlace.class).findAll();
+        RealmPlace place = places.where().equalTo("id", placeID).findFirst();
+        Snackbar.make(parent,
+                String.format(getString(R.string.place_deletion_message),
+                        place.getName()), Snackbar.LENGTH_LONG).show();
+        realm.beginTransaction();
+        place.deleteFromRealm();
+        realm.commitTransaction();
+    }
 }

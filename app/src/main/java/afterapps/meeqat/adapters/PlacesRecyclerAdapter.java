@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import afterapps.meeqat.R;
@@ -36,11 +38,17 @@ public class PlacesRecyclerAdapter extends RealmRecyclerViewAdapter<RealmPlace, 
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         MyViewHolder holder = (MyViewHolder) viewHolder;
         if (getData() != null) {
-            holder.placesItemTextView.setText(getData().get(position).getName());
-            if (getData().get(position).isActive())
-                holder.placesItemTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
-            else
-                holder.placesItemTextView.setTextColor(ContextCompat.getColor(context, R.color.primary_text));
+            RealmPlace place = getData().get(position);
+            holder.nameTextView.setText(place.getName());
+            holder.activeRadioButton.setChecked(place.isActive());
+            holder.deleteIconImageView.setEnabled(!place.isActive());
+            if (place.isActive()) {
+                holder.deleteIconImageView.setAlpha((float) 0.54);
+                holder.nameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+            } else {
+                holder.deleteIconImageView.setAlpha((float) 1);
+                holder.nameTextView.setTextColor(ContextCompat.getColor(context, R.color.primary_text));
+            }
         }
     }
 
@@ -49,19 +57,37 @@ public class PlacesRecyclerAdapter extends RealmRecyclerViewAdapter<RealmPlace, 
             implements View.OnClickListener {
 
         @BindView(R.id.places_item_name_text_view)
-        TextView placesItemTextView;
+        TextView nameTextView;
+        @BindView(R.id.item_places_item_delete_icon)
+        ImageView deleteIconImageView;
+        @BindView(R.id.item_places_item_parent)
+        View parent;
+        @BindView(R.id.item_places_radio_button)
+        RadioButton activeRadioButton;
 
         MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            placesItemTextView.setOnClickListener(this);
+            parent.setOnClickListener(this);
+            deleteIconImageView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (getData() != null) {
-                ((ActivityLocations) context).handleRecyclerClick(getData().get(getLayoutPosition()).getId());
+            switch (view.getId()) {
+                case R.id.item_places_item_delete_icon:
+                    if (getData() != null) {
+                        ((ActivityLocations) context).handleDeletionClick(getData().get(getLayoutPosition()).getId());
+                    }
+                    break;
+
+                case R.id.item_places_item_parent:
+                    if (getData() != null) {
+                        ((ActivityLocations) context).handleRecyclerClick(getData().get(getLayoutPosition()).getId());
+                    }
+                    break;
             }
+
         }
     }
 }

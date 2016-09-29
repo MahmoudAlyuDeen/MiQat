@@ -1,7 +1,6 @@
 package afterapps.meeqat.fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,7 +29,6 @@ public class FragmentPrayersContent extends Fragment {
     @BindView(R.id.prayers_recycler_view)
     RecyclerView prayersRecycler;
     Realm realm;
-    private Handler mHandler;
     PrayersRecyclerAdapter prayersRecyclerAdapter;
     RealmPlace activePlace;
 
@@ -71,17 +69,8 @@ public class FragmentPrayersContent extends Fragment {
 
     @Override
     public void onResume() {
-        mHandler = new Handler();
-        startRepeatingTask();
-
         init();
         super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        stopRepeatingTask();
-        super.onPause();
     }
 
     private void init() {
@@ -90,38 +79,6 @@ public class FragmentPrayersContent extends Fragment {
             activePlace = places.where().equalTo("active", true).findFirst();
             displayPrayers(activePlace);
         }
-    }
-
-    Runnable mStatusChecker = new Runnable() {
-        @Override
-        public void run() {
-            try {
-                if (prayersRecyclerAdapter != null) {
-                    resendNextPrayer();
-                }
-            } finally
-
-            {
-                int mInterval = 1000;
-                mHandler.postDelayed(mStatusChecker, mInterval);
-            }
-        }
-    };
-
-    private void resendNextPrayer() {
-        if (activePlace != null) {
-            RealmObjectPrayer nextPrayer = getNextPrayer(activePlace);
-            if (nextPrayer != null)
-                prayersRecyclerAdapter.setNextPrayer(nextPrayer);
-        }
-    }
-
-    void startRepeatingTask() {
-        mStatusChecker.run();
-    }
-
-    void stopRepeatingTask() {
-        mHandler.removeCallbacks(mStatusChecker);
     }
 
 
@@ -146,7 +103,7 @@ public class FragmentPrayersContent extends Fragment {
                 .equalTo("day", day).findAll();
         prayers = prayers.sort("timestamp", Sort.ASCENDING);
 
-        prayersRecyclerAdapter = new PrayersRecyclerAdapter(getContext(), prayers, dayString, getNextPrayer(activePlace), now, this);
+        prayersRecyclerAdapter = new PrayersRecyclerAdapter(getContext(), prayers, dayString, getNextPrayer(activePlace), now, prayersRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
         prayersRecyclerAdapter.setHasStableIds(true);
@@ -166,9 +123,5 @@ public class FragmentPrayersContent extends Fragment {
             nextPrayer = prayerRealmResults.first();
         }
         return nextPrayer;
-    }
-
-    public void invalidatePrayers() {
-        init();
     }
 }

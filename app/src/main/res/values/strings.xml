@@ -32,4 +32,6 @@
     <string name="no_prayers_message">Can\'t connect to prayers server\nTouch to retry!</string>
     <string name="action_retry">Retry</string>
     <string name="last_animated_key">lastAnimatedKey</string>
+    <string name="action_add">Add</string>
+    <string name="place_deletion_message">%1$s deleted!</string>
 </resources>

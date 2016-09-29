@@ -16,12 +16,9 @@ import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
-import java.util.Calendar;
-
 import afterapps.meeqat.R;
 import afterapps.meeqat.Utilities;
 import afterapps.meeqat.datamodel.RealmObjectPrayer;
-import afterapps.meeqat.fragments.FragmentPrayersContent;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.OrderedRealmCollection;
@@ -37,14 +34,14 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
     private String dayString;
     private long now;
     private RealmObjectPrayer nextPrayer;
-    private FragmentPrayersContent fragment;
+    private RecyclerView recyclerView;
 
-    public PrayersRecyclerAdapter(Context context, OrderedRealmCollection<RealmObjectPrayer> data, String dayString, RealmObjectPrayer nextPrayer, long now, FragmentPrayersContent fragmentPrayersContent) {
+    public PrayersRecyclerAdapter(Context context, OrderedRealmCollection<RealmObjectPrayer> data, String dayString, RealmObjectPrayer nextPrayer, long now, RecyclerView prayersRecycler) {
         super(context, data, true);
         this.dayString = dayString;
         this.now = now;
         this.nextPrayer = nextPrayer;
-        this.fragment = fragmentPrayersContent;
+        this.recyclerView = prayersRecycler;
     }
 
     @Override
@@ -73,6 +70,7 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
             if (now > getData().get(position).getTimestamp()) {
                 holder.itemParent.setAlpha((float) 0.54);
             } else if (nextPrayer != null && prayer.getPrayerID() == nextPrayer.getPrayerID()) {
+                recyclerView.smoothScrollToPosition(position);
                 holder.prayerNameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
                 holder.prayerEnglishNameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
                 holder.prayerTimeTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
@@ -116,15 +114,6 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
                 prayerIcon.color(Color.BLACK);
             }
             holder.prayerIconImageView.setImageDrawable(prayerIcon);
-        }
-    }
-
-    public void setNextPrayer(RealmObjectPrayer nextPrayer) {
-        RealmObjectPrayer old = this.nextPrayer;
-        this.now = Calendar.getInstance().getTimeInMillis();
-        if (this.nextPrayer == null || nextPrayer.getPrayerID() != old.getPrayerID()) {
-            this.nextPrayer = nextPrayer;
-            fragment.invalidatePrayers();
         }
     }
 
