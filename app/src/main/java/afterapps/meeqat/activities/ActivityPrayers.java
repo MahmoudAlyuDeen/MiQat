@@ -251,7 +251,7 @@ public class ActivityPrayers extends AppCompatActivity {
         if (places.size() != 0) {
             Calendar calendar = Calendar.getInstance();
             long now = calendar.getTimeInMillis();
-            long range = now + (1000 * 60 * 60 * 24 * 2);
+            long range = now + (1000 * 60 * 60 * 12);
             RealmPlace activePlace = places.where().equalTo("active", true).findFirst();
             RealmResults<RealmObjectPrayer> prayers = realm.where(RealmObjectPrayer.class)
                     .equalTo("place", activePlace.getId())
