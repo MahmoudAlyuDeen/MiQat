@@ -1,7 +1,7 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="delete_icon_margin">16dp</dimen>
     <dimen name="dot_indicator_bottom_margin">8dp</dimen>
     <dimen name="fab_overlap_padding">88dp</dimen>
     <dimen name="text_size_next_prayer">34sp</dimen>
@@ -11,5 +11,6 @@
     <dimen name="text_size_secondary">14sp</dimen>
     <dimen name="divider_padding">68dp</dimen>
     <dimen name="connection_error_icon">68dp</dimen>
+    <dimen name="toolbar_progress_margin">16dp</dimen>
 
 </resources>
