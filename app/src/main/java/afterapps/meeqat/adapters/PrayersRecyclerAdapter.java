@@ -1,7 +1,6 @@
 package afterapps.meeqat.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -70,7 +69,7 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
             if (now > getData().get(position).getTimestamp()) {
                 holder.itemParent.setAlpha((float) 0.54);
             } else if (nextPrayer != null && prayer.getPrayerID() == nextPrayer.getPrayerID()) {
-                recyclerView.smoothScrollToPosition(position);
+                recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, new RecyclerView.State(), position);
                 holder.prayerNameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
                 holder.prayerEnglishNameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
                 holder.prayerTimeTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
@@ -111,7 +110,7 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
             if (upNext) {
                 prayerIcon.color(ContextCompat.getColor(context, R.color.colorAccent));
             } else {
-                prayerIcon.color(Color.BLACK);
+                prayerIcon.color(ContextCompat.getColor(context, R.color.primary_text));
             }
             holder.prayerIconImageView.setImageDrawable(prayerIcon);
         }

@@ -162,11 +162,11 @@ public class ActivityLocations extends AppCompatActivity {
             realmPlace.setTimezone(reverseGeoResponse.getTimeZoneId());
             realm.copyToRealmOrUpdate(realmPlace);
             realm.commitTransaction();
-            activatePlace(place.getId());
+            activatePlace(place.getId(), true);
         }
     }
 
-    private void activatePlace(String id) {
+    private void activatePlace(String id, boolean finish) {
         places = realm.where(RealmPlace.class).findAll();
         realm.beginTransaction();
         for (int i = 0; i < places.size(); i++) {
@@ -180,11 +180,12 @@ public class ActivityLocations extends AppCompatActivity {
         place.setActive(true);
         realm.copyToRealmOrUpdate(place);
         realm.commitTransaction();
-        finish();
+        if (finish)
+            finish();
     }
 
     public void handleRecyclerClick(String id) {
-        activatePlace(id);
+        activatePlace(id, true);
     }
 
     private void getTimezone(Place place) {
@@ -237,5 +238,8 @@ public class ActivityLocations extends AppCompatActivity {
         realm.beginTransaction();
         place.deleteFromRealm();
         realm.commitTransaction();
+        places = realm.where(RealmPlace.class).findAll();
+        if (places.size() != 0)
+            activatePlace(places.first().getId(), false);
     }
 }

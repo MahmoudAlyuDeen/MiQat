@@ -26,7 +26,7 @@
     <string name="next_prayer_subtitle_text_view">Till <b>%1$s</b></string>
     <string name="today_prayers_title">Today</string>
     <string name="tomorrow_prayers_title">Tomorrow</string>
-    <string name="mosque_anchor">0000</string>
+    <string name="mosque_anchor">00000</string>
     <string name="action_location">Location</string>
     <string name="action_libraries">Open source libraries</string>
     <string name="no_prayers_message">Can\'t connect to prayers server\nTouch to retry!</string>

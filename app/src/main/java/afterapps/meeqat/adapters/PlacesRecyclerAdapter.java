@@ -41,14 +41,7 @@ public class PlacesRecyclerAdapter extends RealmRecyclerViewAdapter<RealmPlace, 
             RealmPlace place = getData().get(position);
             holder.nameTextView.setText(place.getName());
             holder.activeRadioButton.setChecked(place.isActive());
-            holder.deleteIconImageView.setEnabled(!place.isActive());
-            if (place.isActive()) {
-                holder.deleteIconImageView.setAlpha((float) 0.54);
-                holder.nameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
-            } else {
-                holder.deleteIconImageView.setAlpha((float) 1);
-                holder.nameTextView.setTextColor(ContextCompat.getColor(context, R.color.primary_text));
-            }
+            holder.nameTextView.setTextColor(ContextCompat.getColor(context, place.isActive()? R.color.colorAccent : R.color.primary_text));
         }
     }
 

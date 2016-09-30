@@ -1,6 +1,5 @@
 package afterapps.meeqat.activities;
 
-import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -70,6 +70,8 @@ public class ActivityPrayers extends AppCompatActivity {
     View nextPrayer;
     @BindView(R.id.animating_image_view)
     ImageView animatingImageView;
+    @BindView(R.id.mosque_image_view)
+    ImageView mosqueImageView;
 
     private boolean animated;
     private boolean reAnimated;
@@ -80,7 +82,6 @@ public class ActivityPrayers extends AppCompatActivity {
 
     RealmObjectPrayer lastHighlightedPrayer;
     int lastUpdatedDay;
-    private int displayedIcon;
 
     Call<PrayersResponse> nextMonthPrayerCall;
     Call<PrayersResponse> currentMonthPrayerCall;
@@ -133,73 +134,43 @@ public class ActivityPrayers extends AppCompatActivity {
         long now = Calendar.getInstance().getTimeInMillis();
         long delta = now - lastAnimated;
 
+        int mosqueWidth = mosqueImageView.getWidth();
+        int mosqueHeight = mosqueImageView.getHeight();
+        int iconSize = mosqueWidth / 7;
+        int iconRightRightMargin = (int) (mosqueWidth / 3.5);
+
+        int displacement = mosqueHeight / 2;
+
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(iconSize, iconSize);
+        layoutParams.setMargins(0, 0, iconRightRightMargin, 0);
+
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+
+        animatingImageView.setLayoutParams(layoutParams);
+        animatingImageView.setAlpha((float) 0);
+
         if (repeat) {
             if (delta > 2000) {
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putLong(getString(R.string.last_animated_key), now);
-                editor.commit();
-
-                animatingImageView.animate()
-                        .alpha(0)
-                        .translationYBy(150)
-                        .setDuration(0).setListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animator) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animator) {
-                        animatingImageView.animate()
-                                .alpha(1)
-                                .translationYBy(-150)
-                                .setDuration(1000)
-                                .setInterpolator(new AccelerateDecelerateInterpolator()).setListener(new Animator.AnimatorListener() {
-                            @Override
-                            public void onAnimationStart(Animator animator) {
-
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animator animator) {
-                                animator.cancel();
-                            }
-
-                            @Override
-                            public void onAnimationCancel(Animator animator) {
-
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animator animator) {
-
-                            }
-                        });
-
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animator) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animator) {
-
-                    }
-                });
+                animatingImageView.setTranslationY(0);
+                rise(displacement);
+            } else {
+                animatingImageView.setAlpha((float) 1);
             }
-        } else {
-            animatingImageView.animate()
-                    .alpha(1)
-                    .translationYBy(-150)
-                    .setDuration(1000)
-                    .setInterpolator(new AccelerateDecelerateInterpolator());
+        } else
+            rise(displacement);
 
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putLong(getString(R.string.last_animated_key), now);
-            editor.commit();
-        }
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putLong(getString(R.string.last_animated_key), now);
+        editor.commit();
+    }
+
+    private void rise(int displacement) {
+        animatingImageView.animate()
+                .alpha(1)
+                .translationYBy(-displacement)
+                .setDuration(1000)
+                .setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
     @Override
@@ -261,7 +232,8 @@ public class ActivityPrayers extends AppCompatActivity {
                     .sort("timestamp", Sort.ASCENDING);
 
             if (prayers.size() != 0) {
-                displayAnimatingIcon(activePlace);
+                if (mosqueImageView.getWidth() != 0)
+                    displayAnimatingIcon(activePlace);
                 showPrayerSchedule();
                 showNextPrayer();
                 RealmObjectPrayer nextPrayer = prayers.first();
@@ -366,30 +338,22 @@ public class ActivityPrayers extends AppCompatActivity {
             long sunrise = shurouq.getTimestamp();
             long sunset = maghrib.getTimestamp();
 
-            int oldIcon = displayedIcon;
 
             IconicsDrawable timeIcon = new IconicsDrawable(this).sizeDp(48);
             if (now < sunrise) {
                 //midnight to sunrise
                 timeIcon.icon(WeatherIcons.Icon.wic_stars);
-                displayedIcon = 0;
             } else if (now > sunset) {
                 //sunset to midnight
                 timeIcon.icon(FontAwesome.Icon.faw_moon_o);
-                displayedIcon = 1;
             } else {
                 //sunrise to sunset
                 timeIcon.icon(WeatherIcons.Icon.wic_day_sunny);
-                displayedIcon = 2;
             }
             timeIcon.color(Color.WHITE);
 
-            if (oldIcon != displayedIcon) {
-
-            }
 
             animatingImageView.setImageDrawable(timeIcon);
-            animatingImageView.setAlpha((float) 1);
 
             if (!animated) {
                 animated = true;

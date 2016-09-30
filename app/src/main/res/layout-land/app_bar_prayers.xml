@@ -65,7 +65,6 @@
             android:textSize="@dimen/text_size_next_prayer"
             tools:ignore="RelativeOverlap" />
 
-
         <RelativeLayout
             android:id="@+id/mosque_parent"
             android:layout_width="match_parent"
@@ -77,6 +76,7 @@
             android:gravity="end">
 
             <ImageView
+                android:id="@+id/mosque_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -88,17 +88,10 @@
 
         <ImageView
             android:id="@+id/animating_image_view"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignBottom="@id/mosque_parent"
-            android:layout_alignEnd="@id/mosque_parent"
-            android:layout_alignRight="@id/mosque_parent"
-            android:layout_marginEnd="@dimen/divider_padding"
-            android:layout_marginRight="@dimen/divider_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:alpha="0"
-            android:translationZ="-1dp"
-            tools:ignore="ContentDescription"
-            tools:targetApi="lollipop" />
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 
