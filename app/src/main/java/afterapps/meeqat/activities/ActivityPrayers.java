@@ -1,5 +1,6 @@
 package afterapps.meeqat.activities;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -86,6 +87,7 @@ public class ActivityPrayers extends AppCompatActivity {
     Call<PrayersResponse> nextMonthPrayerCall;
     Call<PrayersResponse> currentMonthPrayerCall;
     RetrofitClients.PrayerTimesClient prayerTimesClient;
+    private int lastDisplayedIcon;
 
 
     @Override
@@ -114,6 +116,7 @@ public class ActivityPrayers extends AppCompatActivity {
     private void init() {
         animated = false;
         reAnimated = true;
+        lastDisplayedIcon = 0;
         realm = Realm.getDefaultInstance();
         setupRetryListener();
     }
@@ -128,7 +131,7 @@ public class ActivityPrayers extends AppCompatActivity {
     }
 
     @SuppressLint("CommitPrefEdits")
-    private void animateIcon(boolean repeat) {
+    private void animateIcon(boolean repeat, boolean changed, IconicsDrawable newIcon) {
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         final long lastAnimated = sharedPref.getLong(getString(R.string.last_animated_key), 0);
         long now = Calendar.getInstance().getTimeInMillis();
@@ -148,12 +151,14 @@ public class ActivityPrayers extends AppCompatActivity {
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
 
         animatingImageView.setLayoutParams(layoutParams);
-        animatingImageView.setAlpha((float) 0);
 
         if (repeat) {
             if (delta > 2000) {
-                animatingImageView.setTranslationY(0);
-                rise(displacement);
+                if (changed) {
+                    setChangeRise(displacement, newIcon);
+                } else {
+                    rise(displacement);
+                }
             } else {
                 animatingImageView.setAlpha((float) 1);
             }
@@ -165,12 +170,63 @@ public class ActivityPrayers extends AppCompatActivity {
         editor.commit();
     }
 
+    private void setChangeRise(final int displacement, final IconicsDrawable newIcon) {
+        animatingImageView.animate()
+                .alpha(0)
+                .translationYBy(displacement * 8)
+                .setDuration(3000)
+                .setInterpolator(new AccelerateDecelerateInterpolator()).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                animatingImageView.setImageDrawable(newIcon);
+                rise(displacement);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
+
     private void rise(int displacement) {
+        animatingImageView.setTranslationY(0);
+        animatingImageView.setAlpha((float) 0);
         animatingImageView.animate()
                 .alpha(1)
                 .translationYBy(-displacement)
                 .setDuration(1000)
-                .setInterpolator(new AccelerateDecelerateInterpolator());
+                .setInterpolator(new AccelerateDecelerateInterpolator()).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                animation.cancel();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
     }
 
     @Override
@@ -319,6 +375,7 @@ public class ActivityPrayers extends AppCompatActivity {
     }
 
 
+    @SuppressLint("CommitPrefEdits")
     private void displayAnimatingIcon(RealmPlace activePlace) {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -338,32 +395,43 @@ public class ActivityPrayers extends AppCompatActivity {
             long sunrise = shurouq.getTimestamp();
             long sunset = maghrib.getTimestamp();
 
-
             IconicsDrawable timeIcon = new IconicsDrawable(this).sizeDp(48);
+            int displayedIcon;
             if (now < sunrise) {
                 //midnight to sunrise
                 timeIcon.icon(WeatherIcons.Icon.wic_stars);
+                displayedIcon = 1;
             } else if (now > sunset) {
                 //sunset to midnight
                 timeIcon.icon(FontAwesome.Icon.faw_moon_o);
+                displayedIcon = 2;
             } else {
                 //sunrise to sunset
                 timeIcon.icon(WeatherIcons.Icon.wic_day_sunny);
+                displayedIcon = 3;
             }
             timeIcon.color(Color.WHITE);
 
+            boolean changed = false;
+            if (lastDisplayedIcon != 0 && lastDisplayedIcon != displayedIcon) {
+                changed = true;
+                reAnimated = false;
+            } else {
+                animatingImageView.setImageDrawable(timeIcon);
+            }
+            lastDisplayedIcon = displayedIcon;
 
-            animatingImageView.setImageDrawable(timeIcon);
 
             if (!animated) {
                 animated = true;
-                animateIcon(false);
+                animateIcon(false, changed, timeIcon);
             } else if (!reAnimated) {
                 reAnimated = true;
-                animateIcon(true);
+                animateIcon(true, changed, timeIcon);
             }
         }
     }
+
 
     private void refreshPrayersForCurrentPlace() {
         RealmResults<RealmPlace> places = realm.where(RealmPlace.class).findAll();

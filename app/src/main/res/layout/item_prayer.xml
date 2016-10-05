@@ -26,7 +26,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:alpha="0.9"
             android:adjustViewBounds="true"
             tools:ignore="ContentDescription" />
 
@@ -45,7 +44,7 @@
                 android:fontFamily="sans-serif"
                 android:maxLines="1"
                 android:text="@string/placeholder"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_primary" />
 
             <TextView
@@ -59,7 +58,7 @@
                 android:fontFamily="sans-serif"
                 android:maxLines="1"
                 android:text="@string/placeholder"
-                android:textColor="@color/secondary_text"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_secondary" />
 
             <TextView
@@ -70,7 +69,7 @@
                 android:layout_alignParentRight="true"
                 android:fontFamily="sans-serif"
                 android:text="@string/placeholder"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_secondary"
                 tools:ignore="RelativeOverlap" />
 

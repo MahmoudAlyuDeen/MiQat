@@ -1,6 +1,7 @@
 package afterapps.meeqat.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,6 +43,9 @@ public class PlacesRecyclerAdapter extends RealmRecyclerViewAdapter<RealmPlace, 
             holder.nameTextView.setText(place.getName());
             holder.activeRadioButton.setChecked(place.isActive());
             holder.nameTextView.setTextColor(ContextCompat.getColor(context, place.isActive()? R.color.colorAccent : R.color.primary_text));
+            if (place.isActive()) {
+                holder.nameTextView.setTypeface(null, Typeface.BOLD);
+            }
         }
     }
 

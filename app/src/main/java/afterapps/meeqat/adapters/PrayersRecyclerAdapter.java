@@ -110,7 +110,7 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
             if (upNext) {
                 prayerIcon.color(ContextCompat.getColor(context, R.color.colorAccent));
             } else {
-                prayerIcon.color(ContextCompat.getColor(context, R.color.primary_text));
+                prayerIcon.color(ContextCompat.getColor(context, R.color.colorPrimary));
             }
             holder.prayerIconImageView.setImageDrawable(prayerIcon);
         }
