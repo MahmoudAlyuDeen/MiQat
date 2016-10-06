@@ -1,6 +1,8 @@
-package afterapps.meeqat.fragments;
+package afterapps.miqat.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,10 +12,10 @@ import android.view.ViewGroup;
 
 import java.util.Calendar;
 
-import afterapps.meeqat.R;
-import afterapps.meeqat.adapters.PrayersRecyclerAdapter;
-import afterapps.meeqat.datamodel.RealmObjectPrayer;
-import afterapps.meeqat.datamodel.RealmPlace;
+import afterapps.miqat.R;
+import afterapps.miqat.adapters.PrayersRecyclerAdapter;
+import afterapps.miqat.datamodel.RealmObjectPrayer;
+import afterapps.miqat.datamodel.RealmPlace;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -27,6 +29,10 @@ public class FragmentPrayersContent extends Fragment {
     Realm realm;
     PrayersRecyclerAdapter prayersRecyclerAdapter;
     RealmPlace activePlace;
+
+    private int method;
+    private int school;
+    private int latitudeMethod;
 
     public FragmentPrayersContent() {
     }
@@ -54,8 +60,12 @@ public class FragmentPrayersContent extends Fragment {
         long now = Calendar.getInstance().getTimeInMillis();
         RealmResults<RealmObjectPrayer> prayers = realm.where(RealmObjectPrayer.class)
                 .equalTo("place", activePlace.getId())
+                .equalTo("method", method)
+                .equalTo("school", school)
+                .equalTo("latitudeMethod", latitudeMethod)
                 .greaterThan("timestamp", now)
-                .findAll().sort("timestamp", Sort.ASCENDING);
+                .findAll()
+                .sort("timestamp", Sort.ASCENDING);
 
         if (prayers.size() != 0) {
             long maxTimestamp = prayers.get(6).getTimestamp();
@@ -65,7 +75,8 @@ public class FragmentPrayersContent extends Fragment {
                     .sort("timestamp", Sort.ASCENDING);
         }
 
-        prayersRecyclerAdapter = new PrayersRecyclerAdapter(getContext(), prayers, getNextPrayer(activePlace), prayersRecycler);
+        prayersRecyclerAdapter = new PrayersRecyclerAdapter(getContext(), prayers,
+                getNextPrayer(activePlace));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
         prayersRecyclerAdapter.setHasStableIds(true);
@@ -76,8 +87,12 @@ public class FragmentPrayersContent extends Fragment {
     private RealmObjectPrayer getNextPrayer(RealmPlace activePlace) {
         long now = Calendar.getInstance().getTimeInMillis();
         RealmResults<RealmObjectPrayer> prayerRealmResults = realm.where(RealmObjectPrayer.class)
-                .equalTo("place", activePlace.getId()).findAll();
-        prayerRealmResults = prayerRealmResults.where().greaterThan("timestamp", now).findAll()
+                .equalTo("place", activePlace.getId())
+                .equalTo("method", method)
+                .equalTo("school", school)
+                .equalTo("latitudeMethod", latitudeMethod)
+                .greaterThan("timestamp", now)
+                .findAll()
                 .sort("timestamp", Sort.ASCENDING);
 
         RealmObjectPrayer nextPrayer = null;
@@ -88,6 +103,13 @@ public class FragmentPrayersContent extends Fragment {
     }
 
     public void displayPrayers() {
-         populateSchedule();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        method = Integer.
+                valueOf(sharedPref.getString(getString(R.string.preference_key_method), "5"));
+        school = Integer.
+                valueOf(sharedPref.getString(getString(R.string.preference_key_school), "0"));
+        latitudeMethod = Integer.
+                valueOf(sharedPref.getString(getString(R.string.preference_key_latitude), "3"));
+        populateSchedule();
     }
 }

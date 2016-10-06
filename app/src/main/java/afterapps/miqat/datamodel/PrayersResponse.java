@@ -1,5 +1,5 @@
 
-package afterapps.meeqat.datamodel;
+package afterapps.miqat.datamodel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -18,7 +18,7 @@ public class PrayersResponse {
     private String status;
     @SerializedName("data")
     @Expose
-    private List<Day> days = new ArrayList<Day>();
+    private List<Day> days = new ArrayList<>();
 
     /**
      * 

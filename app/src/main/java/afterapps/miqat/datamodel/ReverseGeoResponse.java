@@ -1,5 +1,5 @@
 
-package afterapps.meeqat.datamodel;
+package afterapps.miqat.datamodel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

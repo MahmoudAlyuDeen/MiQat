@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="afterapps.meeqat">
+    package="afterapps.miqat">
 
     <application
-        android:name=".Application"
+        android:name="afterapps.miqat.Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,16 +12,20 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.ActivityLocations"
+            android:name="afterapps.miqat.activities.ActivityPreferences"
             android:theme="@style/AppTheme"
-            android:parentActivityName=".activities.ActivityPrayers" />
+            android:parentActivityName="afterapps.miqat.activities.ActivityPrayers" />
+        <activity
+            android:name="afterapps.miqat.activities.ActivityLocations"
+            android:theme="@style/AppTheme"
+            android:parentActivityName="afterapps.miqat.activities.ActivityPrayers" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCUSRQAQCa5CmKPWe_VWdlArClGjQTXAZE" />
 
         <activity
-            android:name=".activities.ActivityPrayers"
+            android:name="afterapps.miqat.activities.ActivityPrayers"
             android:theme="@style/AppTheme"
             android:launchMode="singleTop">
             <intent-filter>

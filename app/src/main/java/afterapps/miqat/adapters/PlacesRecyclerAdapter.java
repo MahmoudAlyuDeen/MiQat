@@ -1,4 +1,4 @@
-package afterapps.meeqat.adapters;
+package afterapps.miqat.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import afterapps.meeqat.R;
-import afterapps.meeqat.activities.ActivityLocations;
-import afterapps.meeqat.datamodel.RealmPlace;
+import afterapps.miqat.R;
+import afterapps.miqat.activities.ActivityLocations;
+import afterapps.miqat.datamodel.RealmPlace;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.OrderedRealmCollection;

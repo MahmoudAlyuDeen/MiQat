@@ -1,4 +1,4 @@
-package afterapps.meeqat;
+package afterapps.miqat;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

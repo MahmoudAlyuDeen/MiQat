@@ -44,7 +44,7 @@
         android:layout_toRightOf="@id/item_places_radio_button"
         android:layout_toStartOf="@id/item_places_item_delete_icon"
         android:ellipsize="end"
-        android:gravity="left"
+        android:gravity="right"
         android:text="@string/placeholder"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         tools:ignore="RtlHardcoded" />

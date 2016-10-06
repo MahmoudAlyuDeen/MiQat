@@ -1,4 +1,4 @@
-package afterapps.meeqat.activities;
+package afterapps.miqat.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,11 +22,11 @@ import com.google.gson.GsonBuilder;
 
 import java.util.Calendar;
 
-import afterapps.meeqat.R;
-import afterapps.meeqat.adapters.PlacesRecyclerAdapter;
-import afterapps.meeqat.datamodel.RealmPlace;
-import afterapps.meeqat.datamodel.ReverseGeoResponse;
-import afterapps.meeqat.helpers.RetrofitClients;
+import afterapps.miqat.R;
+import afterapps.miqat.adapters.PlacesRecyclerAdapter;
+import afterapps.miqat.datamodel.RealmPlace;
+import afterapps.miqat.datamodel.ReverseGeoResponse;
+import afterapps.miqat.helpers.RetrofitClients;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -225,8 +225,15 @@ public class ActivityLocations extends AppCompatActivity {
             @Override
             public void onFailure(Call<ReverseGeoResponse> call, Throwable t) {
                 Log.d(GEO_LOG_TAG, "failure");
+                showError();
             }
         };
+    }
+
+    private void showError() {
+        hideProgress();
+        Snackbar.make(parent, getString(R.string.reverse_geo_error)
+                , Snackbar.LENGTH_LONG).show();
     }
 
     public void handleDeletionClick(String placeID) {

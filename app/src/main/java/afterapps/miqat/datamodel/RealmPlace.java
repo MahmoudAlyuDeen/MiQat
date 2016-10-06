@@ -1,4 +1,4 @@
-package afterapps.meeqat.datamodel;
+package afterapps.miqat.datamodel;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

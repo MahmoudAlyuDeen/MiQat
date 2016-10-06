@@ -1,4 +1,4 @@
-package afterapps.meeqat.activities;
+package afterapps.miqat.activities;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -20,7 +21,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
@@ -28,14 +28,14 @@ import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 import java.util.Calendar;
 import java.util.List;
 
-import afterapps.meeqat.R;
-import afterapps.meeqat.Utilities;
-import afterapps.meeqat.datamodel.Day;
-import afterapps.meeqat.datamodel.PrayersResponse;
-import afterapps.meeqat.datamodel.RealmObjectPrayer;
-import afterapps.meeqat.datamodel.RealmPlace;
-import afterapps.meeqat.fragments.FragmentPrayersContent;
-import afterapps.meeqat.helpers.RetrofitClients;
+import afterapps.miqat.R;
+import afterapps.miqat.Utilities;
+import afterapps.miqat.datamodel.Day;
+import afterapps.miqat.datamodel.PrayersResponse;
+import afterapps.miqat.datamodel.RealmObjectPrayer;
+import afterapps.miqat.datamodel.RealmPlace;
+import afterapps.miqat.fragments.FragmentPrayersContent;
+import afterapps.miqat.helpers.RetrofitClients;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -68,20 +68,22 @@ public class ActivityPrayers extends AppCompatActivity {
     @BindView(R.id.mosque_image_view)
     ImageView mosqueImageView;
 
-    FragmentPrayersContent scheduleFragment;
+    private FragmentPrayersContent scheduleFragment;
 
     private boolean animated;
     private boolean reAnimated;
 
     private Handler mHandler;
 
-    Realm realm;
+    private Realm realm;
+    private RealmObjectPrayer lastHighlightedPrayer;
 
-    RealmObjectPrayer lastHighlightedPrayer;
+    private int method;
+    private int school;
+    private int latitudeMethod;
 
-    Call<PrayersResponse> nextMonthPrayerCall;
-    Call<PrayersResponse> currentMonthPrayerCall;
-    RetrofitClients.PrayerTimesClient prayerTimesClient;
+    private Call<PrayersResponse> nextMonthPrayerCall;
+    private Call<PrayersResponse> currentMonthPrayerCall;
     private int lastDisplayedIcon;
 
 
@@ -109,7 +111,9 @@ public class ActivityPrayers extends AppCompatActivity {
     }
 
     private void init() {
-        scheduleFragment = (FragmentPrayersContent) getSupportFragmentManager().findFragmentById(R.id.prayers_schedule_fragment);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        scheduleFragment = (FragmentPrayersContent) getSupportFragmentManager()
+                .findFragmentById(R.id.prayers_schedule_fragment);
         animated = false;
         reAnimated = true;
         lastDisplayedIcon = 0;
@@ -261,6 +265,15 @@ public class ActivityPrayers extends AppCompatActivity {
     }
 
     private void onStartPrayers() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        method = Integer.
+                valueOf(sharedPref.getString(getString(R.string.preference_key_method), "5"));
+        school = Integer.
+                valueOf(sharedPref.getString(getString(R.string.preference_key_school), "0"));
+        latitudeMethod = Integer.
+                valueOf(sharedPref.getString(getString(R.string.preference_key_latitude), "3"));
+
         refreshPrayersForCurrentPlace();
         mHandler = new Handler();
         startRepeatingTask();
@@ -278,6 +291,9 @@ public class ActivityPrayers extends AppCompatActivity {
             RealmPlace activePlace = places.where().equalTo("active", true).findFirst();
             RealmResults<RealmObjectPrayer> prayers = realm.where(RealmObjectPrayer.class)
                     .equalTo("place", activePlace.getId())
+                    .equalTo("method", method)
+                    .equalTo("school", school)
+                    .equalTo("latitudeMethod", latitudeMethod)
                     .greaterThan("timestamp", now)
                     .lessThan("timestamp", range)
                     .findAll()
@@ -289,8 +305,10 @@ public class ActivityPrayers extends AppCompatActivity {
                 showPrayerSchedule();
                 showNextPrayer();
                 RealmObjectPrayer nextPrayer = prayers.first();
-                nextPrayerTimeTextView.setText(Utilities.getFormattedTime(nextPrayer.getTimestamp() - now));
-                nextPrayerSubtitleTextView.setText(String.format(getString(R.string.next_prayer_subtitle_text_view), nextPrayer.getName()));
+                nextPrayerTimeTextView
+                        .setText(Utilities.getFormattedTime(nextPrayer.getTimestamp() - now));
+                nextPrayerSubtitleTextView
+                        .setText(String.format(getString(R.string.next_prayer_subtitle_text_view), nextPrayer.getName()));
                 displayPrayersSchedule(nextPrayer);
             }
         } else {
@@ -310,7 +328,8 @@ public class ActivityPrayers extends AppCompatActivity {
     }
 
     private void showPrayerSchedule() {
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        android.support.v4.app.FragmentTransaction fragmentTransaction =
+                getSupportFragmentManager().beginTransaction();
         fragmentTransaction.show(scheduleFragment).commitAllowingStateLoss();
         hideProgress();
     }
@@ -365,6 +384,9 @@ public class ActivityPrayers extends AppCompatActivity {
 
         RealmResults<RealmObjectPrayer> prayers = realm.where(RealmObjectPrayer.class)
                 .equalTo("place", activePlace.getId())
+                .equalTo("method", method)
+                .equalTo("school", school)
+                .equalTo("latitudeMethod", latitudeMethod)
                 .equalTo("year", year)
                 .equalTo("month", month)
                 .equalTo("day", day).findAll();
@@ -431,11 +453,21 @@ public class ActivityPrayers extends AppCompatActivity {
 
         RealmResults<RealmObjectPrayer> prayers = realm.where(RealmObjectPrayer.class)
                 .equalTo("place", activePlace.getId())
-                .equalTo("year", currentYear).equalTo("month", currentMonth).findAll();
+                .equalTo("method", method)
+                .equalTo("school", school)
+                .equalTo("latitudeMethod", latitudeMethod)
+                .equalTo("year", currentYear)
+                .equalTo("month", currentMonth)
+                .findAll();
 
         RealmResults<RealmObjectPrayer> nextMonthPrayers = realm.where(RealmObjectPrayer.class)
                 .equalTo("place", activePlace.getId())
-                .equalTo("year", nextMonthYear).equalTo("month", nextMonth).findAll();
+                .equalTo("method", method)
+                .equalTo("school", school)
+                .equalTo("latitudeMethod", latitudeMethod)
+                .equalTo("year", nextMonthYear)
+                .equalTo("month", nextMonth)
+                .findAll();
 
         if (prayers.size() == 0) {
             getPrayerTimes(activePlace, currentMonth, currentYear, true);
@@ -456,11 +488,9 @@ public class ActivityPrayers extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-            case R.id.action_libraries:
-                new LibsBuilder().withActivityTheme(R.style.AppTheme)
-                        .withAutoDetect(true)
-                        .withFields(R.string.class.getFields())
-                        .start(this);
+            case R.id.action_settings:
+                Intent settings = new Intent(this, ActivityPreferences.class);
+                startActivity(settings);
                 return true;
 
             default:
@@ -486,25 +516,28 @@ public class ActivityPrayers extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        prayerTimesClient = retrofit.create(RetrofitClients.PrayerTimesClient.class);
+        RetrofitClients.PrayerTimesClient prayerTimesClient = retrofit
+                .create(RetrofitClients.PrayerTimesClient.class);
 
         final double latitude = activePlace.getLatitude();
         final double longitude = activePlace.getLongitude();
         final String timezone = activePlace.getTimezone();
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        final int method = sharedPref.getInt(getString(R.string.perf_prayers_method_key), 5);
 
         if (currentMonth) {
             if (currentMonthPrayerCall != null) {
                 currentMonthPrayerCall.cancel();
             }
-            currentMonthPrayerCall = prayerTimesClient.getPrayerTimes(latitude, longitude, timezone, method, month + 1, year);
+            currentMonthPrayerCall = prayerTimesClient
+                    .getPrayerTimes(latitude, longitude, timezone, month + 1, year,
+                            method, school, latitudeMethod);
             currentMonthPrayerCall.enqueue(getPrayersCallBack(activePlace));
         } else {
             if (nextMonthPrayerCall != null) {
                 nextMonthPrayerCall.cancel();
             }
-            nextMonthPrayerCall = prayerTimesClient.getPrayerTimes(latitude, longitude, timezone, method, month + 1, year);
+            nextMonthPrayerCall = prayerTimesClient
+                    .getPrayerTimes(latitude, longitude, timezone, month + 1, year,
+                            method, school, latitudeMethod);
             nextMonthPrayerCall.enqueue(getPrayersCallBack(activePlace));
         }
     }
@@ -515,7 +548,8 @@ public class ActivityPrayers extends AppCompatActivity {
             public void onResponse(Call<PrayersResponse> call, Response<PrayersResponse> response) {
                 if (response.isSuccessful() && !call.isCanceled()) {
                     List<Day> days = response.body().getDays();
-                    Utilities.addDataToRealm(days, activePlace.getId(), ActivityPrayers.this);
+                    Utilities.addDataToRealm(days, activePlace.getId(),
+                            method, school, latitudeMethod, ActivityPrayers.this);
                     hideConnectionError();
                 }
             }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="preference_entries_method">
+        <item>الشيعة الإثنا عشرية</item>
+        <item>جامعة العلوم الإسلامية بكراتشي</item>
+        <item>الجمعية الإسلامية لأمريكا الشمالية</item>
+        <item>رابطة العالم الإسلامي</item>
+        <item>جامعة أم القرى</item>
+        <item>الهيئة المصرية العامة للمساحة</item>
+        <item>معهد فيزياء الأرض بجامعة طهران</item>
+    </string-array>
+
+    <string-array name="preference_entries_school">
+        <item>المذهب الشافعي</item>
+        <item>المذهب الحنفي</item>
+    </string-array>
+
+    <string-array name="preference_entries_latitude">
+        <item>منتصف الليل</item>
+        <item>سبع الليل</item>
+        <item>حسب الزاوية</item>
+    </string-array>
+
+</resources>

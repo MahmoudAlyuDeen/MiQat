@@ -1,4 +1,4 @@
-package afterapps.meeqat.adapters;
+package afterapps.miqat.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -14,9 +14,9 @@ import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.weather_icons_typeface_library.WeatherIcons;
 
-import afterapps.meeqat.R;
-import afterapps.meeqat.Utilities;
-import afterapps.meeqat.datamodel.RealmObjectPrayer;
+import afterapps.miqat.R;
+import afterapps.miqat.Utilities;
+import afterapps.miqat.datamodel.RealmObjectPrayer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.OrderedRealmCollection;
@@ -30,12 +30,10 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
     private static final int VIEW_TYPE_DEFAULT = 0;
     private static final int VIEW_TYPE_WITH_TITLE = 1;
     private RealmObjectPrayer nextPrayer;
-    private RecyclerView recyclerView;
 
-    public PrayersRecyclerAdapter(Context context, OrderedRealmCollection<RealmObjectPrayer> data, RealmObjectPrayer nextPrayer, RecyclerView prayersRecycler) {
+    public PrayersRecyclerAdapter(Context context, OrderedRealmCollection<RealmObjectPrayer> data, RealmObjectPrayer nextPrayer) {
         super(context, data, true);
         this.nextPrayer = nextPrayer;
-        this.recyclerView = prayersRecycler;
     }
 
     @Override

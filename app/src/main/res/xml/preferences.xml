@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/preferences_title_prayer_timings">
+
+        <ListPreference
+            android:defaultValue="@string/preference_default_method"
+            android:dialogTitle="@string/preference_dialog_title_method"
+            android:entries="@array/preference_entries_method"
+            android:entryValues="@array/preference_values_method"
+            android:key="@string/preference_key_method"
+            android:summary="@string/preference_summary_method"
+            android:title="@string/preference_title_method" />
+
+        <ListPreference
+            android:defaultValue="@string/preference_default_school"
+            android:dialogTitle="@string/preference_dialog_title_school"
+            android:entries="@array/preference_entries_school"
+            android:entryValues="@array/preference_values_school"
+            android:key="@string/preference_key_school"
+            android:summary="@string/preference_summary_school"
+            android:title="@string/preference_title_school" />
+
+        <ListPreference
+            android:defaultValue="@string/preference_default_latitude"
+            android:dialogTitle="@string/preference_dialog_title_latitude"
+            android:entries="@array/preference_entries_latitude"
+            android:entryValues="@array/preference_values_latitude"
+            android:key="@string/preference_key_latitude"
+            android:summary="@string/preference_summary_latitude"
+            android:title="@string/preference_title_latitude" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preferences_title_acknowledgement">
+
+        <Preference
+            android:key="@string/preference_key_api"
+            android:title="@string/preference_title_api" />
+
+        <Preference
+            android:key="@string/preference_key_libraries"
+            android:title="@string/preference_title_libraries" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
-    android:gravity="center"
-    android:text="@string/no_places_message"
-    android:textColor="@color/colorAccent"
-    android:textSize="@dimen/text_size_primary"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/basic_padding">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_size_next_prayer" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/basic_padding"
+            android:paddingStart="@dimen/basic_padding"
+            android:paddingTop="@dimen/basic_padding_small"
+            android:text="@string/intro_definition"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_primary"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/basic_padding"
+            android:text="@string/add_location_message"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_primary" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

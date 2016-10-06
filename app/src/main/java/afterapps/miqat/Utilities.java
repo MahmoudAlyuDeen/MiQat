@@ -1,9 +1,7 @@
-package afterapps.meeqat;
+package afterapps.miqat;
 
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -12,8 +10,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import afterapps.meeqat.datamodel.Day;
-import afterapps.meeqat.datamodel.RealmObjectPrayer;
+import afterapps.miqat.datamodel.Day;
+import afterapps.miqat.datamodel.RealmObjectPrayer;
 import io.realm.Realm;
 import needle.Needle;
 
@@ -40,14 +38,7 @@ public class Utilities {
         return format.format(calendar.getTime());
     }
 
-    //converts a DP unit to pixels
-    public static float convertDpToPixel(float dp, Context context) {
-        Resources resources = context.getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return dp * (metrics.densityDpi / 160f);
-    }
-
-    public static void addDataToRealm(final List<Day> days, final String activePlaceId, final Context context) {
+    public static void addDataToRealm(final List<Day> days, final String activePlaceId, final int method, final int school, final int latitudeMethod, final Context context) {
         Needle.onBackgroundThread().execute(new Runnable() {
             @Override
             public void run() {
@@ -72,10 +63,13 @@ public class Utilities {
                     realmObjectPrayer.setName(context.getString(R.string.fajr));
                     realmObjectPrayer.setEnglishName(context.getString(R.string.dawn));
                     realmObjectPrayer.setTimestamp(dayCal.getTimeInMillis());
-                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
-                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
                     realmObjectPrayer.setYear(dayCal.get(Calendar.YEAR));
+                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
+                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
                     realmObjectPrayer.setPlace(activePlaceId);
+                    realmObjectPrayer.setMethod(method);
+                    realmObjectPrayer.setSchool(school);
+                    realmObjectPrayer.setLatitudeMethod(latitudeMethod);
                     realmObjectPrayer.setIndex(0);
                     backgroundRealm.copyToRealmOrUpdate(realmObjectPrayer);
                     backgroundRealm.commitTransaction();
@@ -90,10 +84,13 @@ public class Utilities {
                     realmObjectPrayer.setName(context.getString(R.string.shurouq));
                     realmObjectPrayer.setEnglishName(context.getString(R.string.sunrise));
                     realmObjectPrayer.setTimestamp(dayCal.getTimeInMillis());
-                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
-                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
-                    realmObjectPrayer.setYear(dayCal.get(Calendar.YEAR));
                     realmObjectPrayer.setPlace(activePlaceId);
+                    realmObjectPrayer.setYear(dayCal.get(Calendar.YEAR));
+                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
+                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
+                    realmObjectPrayer.setMethod(method);
+                    realmObjectPrayer.setSchool(school);
+                    realmObjectPrayer.setLatitudeMethod(latitudeMethod);
                     realmObjectPrayer.setIndex(1);
                     backgroundRealm.copyToRealmOrUpdate(realmObjectPrayer);
                     backgroundRealm.commitTransaction();
@@ -108,10 +105,13 @@ public class Utilities {
                     realmObjectPrayer.setName(context.getString(R.string.dhuhr));
                     realmObjectPrayer.setEnglishName(context.getString(R.string.noon));
                     realmObjectPrayer.setTimestamp(dayCal.getTimeInMillis());
-                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
-                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
                     realmObjectPrayer.setYear(dayCal.get(Calendar.YEAR));
+                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
+                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
                     realmObjectPrayer.setPlace(activePlaceId);
+                    realmObjectPrayer.setMethod(method);
+                    realmObjectPrayer.setSchool(school);
+                    realmObjectPrayer.setLatitudeMethod(latitudeMethod);
                     realmObjectPrayer.setIndex(2);
                     backgroundRealm.copyToRealmOrUpdate(realmObjectPrayer);
                     backgroundRealm.commitTransaction();
@@ -126,10 +126,13 @@ public class Utilities {
                     realmObjectPrayer.setName(context.getString(R.string.asr));
                     realmObjectPrayer.setEnglishName(context.getString(R.string.afternoon));
                     realmObjectPrayer.setTimestamp(dayCal.getTimeInMillis());
-                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
-                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
                     realmObjectPrayer.setYear(dayCal.get(Calendar.YEAR));
+                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
+                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
                     realmObjectPrayer.setPlace(activePlaceId);
+                    realmObjectPrayer.setMethod(method);
+                    realmObjectPrayer.setSchool(school);
+                    realmObjectPrayer.setLatitudeMethod(latitudeMethod);
                     realmObjectPrayer.setIndex(3);
                     backgroundRealm.copyToRealmOrUpdate(realmObjectPrayer);
                     backgroundRealm.commitTransaction();
@@ -144,10 +147,13 @@ public class Utilities {
                     realmObjectPrayer.setName(context.getString(R.string.maghrib));
                     realmObjectPrayer.setEnglishName(context.getString(R.string.sunset));
                     realmObjectPrayer.setTimestamp(dayCal.getTimeInMillis());
-                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
-                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
                     realmObjectPrayer.setYear(dayCal.get(Calendar.YEAR));
+                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
+                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
                     realmObjectPrayer.setPlace(activePlaceId);
+                    realmObjectPrayer.setMethod(method);
+                    realmObjectPrayer.setSchool(school);
+                    realmObjectPrayer.setLatitudeMethod(latitudeMethod);
                     realmObjectPrayer.setIndex(4);
                     backgroundRealm.copyToRealmOrUpdate(realmObjectPrayer);
                     backgroundRealm.commitTransaction();
@@ -162,10 +168,13 @@ public class Utilities {
                     realmObjectPrayer.setName(context.getString(R.string.isha));
                     realmObjectPrayer.setEnglishName(context.getString(R.string.night));
                     realmObjectPrayer.setTimestamp(dayCal.getTimeInMillis());
-                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
-                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
                     realmObjectPrayer.setYear(dayCal.get(Calendar.YEAR));
+                    realmObjectPrayer.setMonth(dayCal.get(Calendar.MONTH));
+                    realmObjectPrayer.setDay(dayCal.get(Calendar.DAY_OF_MONTH));
                     realmObjectPrayer.setPlace(activePlaceId);
+                    realmObjectPrayer.setMethod(method);
+                    realmObjectPrayer.setSchool(school);
+                    realmObjectPrayer.setLatitudeMethod(latitudeMethod);
                     realmObjectPrayer.setIndex(5);
                     backgroundRealm.copyToRealmOrUpdate(realmObjectPrayer);
                     backgroundRealm.commitTransaction();

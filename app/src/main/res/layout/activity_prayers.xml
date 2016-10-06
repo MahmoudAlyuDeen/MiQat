@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/prayers_schedule_fragment"
-        android:name="afterapps.meeqat.fragments.FragmentPrayersContent"
+        android:name="afterapps.miqat.fragments.FragmentPrayersContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

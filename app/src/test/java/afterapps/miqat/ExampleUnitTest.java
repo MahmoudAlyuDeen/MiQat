@@ -1,4 +1,4 @@
-package afterapps.meeqat;
+package afterapps.miqat;
 
 import org.junit.Test;
 
