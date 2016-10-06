@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -21,7 +20,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.matthewtamlin.sliding_intro_screen_library.indicators.DotIndicator;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -32,11 +30,11 @@ import java.util.List;
 
 import afterapps.meeqat.R;
 import afterapps.meeqat.Utilities;
-import afterapps.meeqat.adapters.PrayersPagerAdapter;
 import afterapps.meeqat.datamodel.Day;
 import afterapps.meeqat.datamodel.PrayersResponse;
 import afterapps.meeqat.datamodel.RealmObjectPrayer;
 import afterapps.meeqat.datamodel.RealmPlace;
+import afterapps.meeqat.fragments.FragmentPrayersContent;
 import afterapps.meeqat.helpers.RetrofitClients;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,12 +49,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ActivityPrayers extends AppCompatActivity {
 
-    @BindView(R.id.prayers_view_pager)
-    ViewPager prayersViewPager;
     @BindView(R.id.activity_prayers_toolbar)
     Toolbar toolbar;
-    @BindView(R.id.prayers_dot_indicator)
-    DotIndicator dotIndicator;
     @BindView(R.id.prayers_progress)
     View prayersProgress;
     @BindView(R.id.no_places_message)
@@ -74,6 +68,8 @@ public class ActivityPrayers extends AppCompatActivity {
     @BindView(R.id.mosque_image_view)
     ImageView mosqueImageView;
 
+    FragmentPrayersContent scheduleFragment;
+
     private boolean animated;
     private boolean reAnimated;
 
@@ -82,7 +78,6 @@ public class ActivityPrayers extends AppCompatActivity {
     Realm realm;
 
     RealmObjectPrayer lastHighlightedPrayer;
-    int lastUpdatedDay;
 
     Call<PrayersResponse> nextMonthPrayerCall;
     Call<PrayersResponse> currentMonthPrayerCall;
@@ -114,6 +109,7 @@ public class ActivityPrayers extends AppCompatActivity {
     }
 
     private void init() {
+        scheduleFragment = (FragmentPrayersContent) getSupportFragmentManager().findFragmentById(R.id.prayers_schedule_fragment);
         animated = false;
         reAnimated = true;
         lastDisplayedIcon = 0;
@@ -238,11 +234,11 @@ public class ActivityPrayers extends AppCompatActivity {
     @Override
     protected void onStop() {
         stopRepeatingTask();
+        lastHighlightedPrayer = null;
         animatingImageView.setAlpha((float) 0);
         reAnimated = false;
         super.onStop();
     }
-
 
     Runnable mStatusChecker = new Runnable() {
         @Override
@@ -295,7 +291,7 @@ public class ActivityPrayers extends AppCompatActivity {
                 RealmObjectPrayer nextPrayer = prayers.first();
                 nextPrayerTimeTextView.setText(Utilities.getFormattedTime(nextPrayer.getTimestamp() - now));
                 nextPrayerSubtitleTextView.setText(String.format(getString(R.string.next_prayer_subtitle_text_view), nextPrayer.getName()));
-                populatePrayersSchedule(nextPrayer, calendar.get(Calendar.DAY_OF_MONTH));
+                displayPrayersSchedule(nextPrayer);
             }
         } else {
             showNoPlacesMessage();
@@ -303,35 +299,19 @@ public class ActivityPrayers extends AppCompatActivity {
 
     }
 
-    private void populatePrayersSchedule(RealmObjectPrayer nextPrayer, int day) {
-        if (lastUpdatedDay != day
-                || lastHighlightedPrayer == null
+    private void displayPrayersSchedule(RealmObjectPrayer nextPrayer) {
+        if (lastHighlightedPrayer == null
                 || lastHighlightedPrayer.getPrayerID() != nextPrayer.getPrayerID()) {
-            lastUpdatedDay = day;
             lastHighlightedPrayer = nextPrayer;
-            prayersViewPager.setAdapter(new PrayersPagerAdapter(getSupportFragmentManager()));
-            prayersViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                }
-
-                @Override
-                public void onPageSelected(int position) {
-                    dotIndicator.setSelectedItem(position, true);
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-
-                }
-            });
+            if (lastHighlightedPrayer != null) {
+                scheduleFragment.displayPrayers();
+            }
         }
     }
 
     private void showPrayerSchedule() {
-        prayersViewPager.setVisibility(View.VISIBLE);
-        dotIndicator.setVisibility(View.VISIBLE);
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.show(scheduleFragment).commitAllowingStateLoss();
         hideProgress();
     }
 
@@ -344,8 +324,8 @@ public class ActivityPrayers extends AppCompatActivity {
     }
 
     private void hidePrayerSchedule() {
-        prayersViewPager.setVisibility(View.GONE);
-        dotIndicator.setVisibility(View.GONE);
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.hide(scheduleFragment).commitAllowingStateLoss();
     }
 
     private void showProgress() {
@@ -421,7 +401,6 @@ public class ActivityPrayers extends AppCompatActivity {
             }
             lastDisplayedIcon = displayedIcon;
 
-
             if (!animated) {
                 animated = true;
                 animateIcon(false, changed, timeIcon);
@@ -431,7 +410,6 @@ public class ActivityPrayers extends AppCompatActivity {
             }
         }
     }
-
 
     private void refreshPrayersForCurrentPlace() {
         RealmResults<RealmPlace> places = realm.where(RealmPlace.class).findAll();

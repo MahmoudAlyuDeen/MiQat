@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <include layout="@layout/app_bar_prayers" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/prayers_view_pager"
+    <fragment
+        android:id="@+id/prayers_schedule_fragment"
+        android:name="afterapps.meeqat.fragments.FragmentPrayersContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <com.matthewtamlin.sliding_intro_screen_library.indicators.DotIndicator
-        android:id="@+id/prayers_dot_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/dot_indicator_bottom_margin"
-        app:numberOfDots="2"
-        app:selectedDotColor="@color/colorAccent"
-        app:unselectedDotColor="@color/colorAccent" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:layout="@layout/fragment_prayers_content" />
 
     <include
         android:id="@+id/no_places_message"

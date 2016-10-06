@@ -24,8 +24,6 @@
     <string name="sunset">The sunset prayer</string>
     <string name="night">The night prayer</string>
     <string name="next_prayer_subtitle_text_view">Till <b>%1$s</b></string>
-    <string name="today_prayers_title">Today</string>
-    <string name="tomorrow_prayers_title">Tomorrow</string>
     <string name="mosque_anchor">00000</string>
     <string name="action_location">Location</string>
     <string name="action_libraries">Open source libraries</string>
@@ -33,4 +31,5 @@
     <string name="last_animated_key">lastAnimatedKey</string>
     <string name="action_add">Add</string>
     <string name="place_deletion_message">%1$s deleted!</string>
+    <string name="schedule_title">Prayers</string>
 </resources>
