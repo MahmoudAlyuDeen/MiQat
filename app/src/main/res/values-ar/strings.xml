@@ -17,7 +17,7 @@
     <string name="next_prayer_subtitle_text_view">حتى %1$s</string>
     <string name="no_prayers_message">مواقيت الصلاة غير متاحة، تأكد من وجود اتصال انترنت.</string>
     <string name="place_deletion_message">تم مسح %1$s</string>
-    <string name="preference_dialog_title_latitude">إختر طرية الحساب</string>
+    <string name="preference_dialog_title_latitude">إختر طريقة الحساب</string>
     <string name="preference_dialog_title_method">إختر طريقة الحساب</string>
     <string name="preference_dialog_title_school">إختر المذهب</string>
     <string name="preference_summary_latitude">طريقة تقسيم الليل في أقصى شمال وجنوب الأرض</string>
@@ -39,4 +39,5 @@
     <string name="reverse_geo_error">لم تتم إضافة الموقع، وقت النظام غير مضبوط بشكل صحيح</string>
     <string name="preference_title_libraries">مكتبات البرمجيات</string>
     <string name="preference_title_api">مصدر المواقيت</string>
+    <string name="noun_subtitle">اسم</string>
 </resources>

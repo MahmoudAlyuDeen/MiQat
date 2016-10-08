@@ -22,6 +22,14 @@
             android:textSize="@dimen/text_size_next_prayer" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/noun_subtitle"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_secondary"
+            android:textStyle="italic" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/basic_padding"

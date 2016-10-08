@@ -47,10 +47,11 @@
     <string name="preference_default_latitude" translatable="false">3</string>
     <string name="add_location_message">Prayer timings are calculated using your geographical location and timezone,
         calculation method and Islamic school can be changed anytime in settings.
-        \n\nTap the location icon to add your location</string>
+        \n\nTap the location icon anytime to update your location</string>
     <string name="reverse_geo_error">Can\'t add location; system time is not set correctly</string>
     <string name="preference_title_libraries">Open source libraries</string>
     <string name="preference_key_api" translatable="false">preferenceKeyApi</string>
     <string name="preference_title_api">Al-Adhan API</string>
     <string name="about_api_url" translatable="false">http://aladhan.com/about</string>
+    <string name="noun_subtitle">noun</string>
 </resources>
