@@ -14,14 +14,6 @@
         android:background="@color/divider_black"
         tools:ignore="RtlSymmetry" />
 
-    <View
-        android:id="@+id/item_prayer_day_divider"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider"
-        android:background="@color/divider_black"
-        android:visibility="gone"
-        tools:ignore="RtlSymmetry" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

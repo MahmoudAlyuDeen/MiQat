@@ -40,4 +40,6 @@
     <string name="preference_title_libraries">مكتبات البرمجيات</string>
     <string name="preference_title_api">مصدر المواقيت</string>
     <string name="noun_subtitle">اسم</string>
+    <string name="sub_header_today">صلوات اليوم</string>
+    <string name="sub_header_tomorrow">صلوات الغد</string>
 </resources>

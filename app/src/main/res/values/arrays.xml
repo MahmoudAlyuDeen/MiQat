@@ -10,7 +10,7 @@
         <item>5</item>
         <item>6</item>
         <item>7</item>
-    </string-array>
+    </string-array >
 
     <string-array name="preference_entries_method" >
         <item>Shia Ithna-Ashari</item>

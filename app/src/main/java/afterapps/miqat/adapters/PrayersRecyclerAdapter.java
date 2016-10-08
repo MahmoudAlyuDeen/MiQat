@@ -2,6 +2,7 @@ package afterapps.miqat.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import io.realm.RealmRecyclerViewAdapter;
 public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObjectPrayer, RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_DEFAULT = 0;
     private static final int VIEW_TYPE_WITH_TITLE = 1;
+    private static final int VIEW_TYPE_WITH_TITLE_TOMORROW = 2;
     private RealmObjectPrayer nextPrayer;
 
     public PrayersRecyclerAdapter(Context context, OrderedRealmCollection<RealmObjectPrayer> data, RealmObjectPrayer nextPrayer) {
@@ -38,30 +40,50 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        if (viewType == VIEW_TYPE_DEFAULT) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_prayer, parent, false);
-        } else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_prayer_with_title, parent, false);
+        View view = null;
+        switch (viewType) {
+            case VIEW_TYPE_DEFAULT:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_prayer, parent, false);
+                break;
+            case VIEW_TYPE_WITH_TITLE:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_prayer_with_title, parent, false);
+                break;
+            case VIEW_TYPE_WITH_TITLE_TOMORROW:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_prayer_with_title, parent, false);
         }
         return new MyViewHolder(view);
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) return VIEW_TYPE_WITH_TITLE;
-        else return VIEW_TYPE_DEFAULT;
+        if (position == 0)
+            return VIEW_TYPE_WITH_TITLE;
+        else if (getData() != null && getData().get(position).getDay() != getData().get(position - 1).getDay())
+            return VIEW_TYPE_WITH_TITLE_TOMORROW;
+        else
+            return VIEW_TYPE_DEFAULT;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         MyViewHolder holder = (MyViewHolder) viewHolder;
         boolean upNext = false;
-        if (getItemViewType(position) == VIEW_TYPE_WITH_TITLE) {
-            holder.divider.setVisibility(View.GONE);
-        } else if (getData() != null && getData().get(position).getIndex() == 0) {
-            holder.dayDivider.setVisibility(View.VISIBLE);
-            holder.divider.setVisibility(View.GONE);
+        int viewType = getItemViewType(position);
+        switch (viewType) {
+            case VIEW_TYPE_WITH_TITLE:
+                holder.divider.setVisibility(View.GONE);
+                if (holder.subheaderTextView != null) {
+                    holder.subheaderTextView.setText(context.getString(R.string.sub_header_today));
+                }
+                break;
+            case VIEW_TYPE_WITH_TITLE_TOMORROW:
+                if (holder.dayDivider != null) {
+                    holder.divider.setVisibility(View.GONE);
+                }
+                if (holder.subheaderTextView != null) {
+                    holder.subheaderTextView.setText(context.getString(R.string.sub_header_tomorrow));
+                }
+                break;
         }
         if (getData() != null) {
             RealmObjectPrayer prayer = getData().get(position);
@@ -118,12 +140,14 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
         TextView prayerTimeTextView;
         @BindView(R.id.prayer_icon_image_view)
         ImageView prayerIconImageView;
-        @BindView(R.id.prayer_item_parent)
-        View itemParent;
         @BindView(R.id.item_prayer_title_divider)
         View divider;
+        @Nullable
         @BindView(R.id.item_prayer_day_divider)
         View dayDivider;
+        @Nullable
+        @BindView(R.id.prayers_schedule_sub_header_text_view)
+        TextView subheaderTextView;
 
         MyViewHolder(View view) {
             super(view);

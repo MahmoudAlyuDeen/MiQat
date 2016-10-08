@@ -54,4 +54,6 @@
     <string name="preference_title_api">Al-Adhan API</string>
     <string name="about_api_url" translatable="false">http://aladhan.com/about</string>
     <string name="noun_subtitle">noun</string>
+    <string name="sub_header_today">Today</string>
+    <string name="sub_header_tomorrow">Tomorrow</string>
 </resources>
