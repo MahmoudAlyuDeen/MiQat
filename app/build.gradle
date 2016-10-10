@@ -36,7 +36,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.matthew-tamlin:sliding-intro-screen:3.2.0'
     compile('com.mikepenz:aboutlibraries:5.8.1@aar') {
         transitive = true
     }
