@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="preference_values_method">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <string-array name="preference_entries_method">
+        <item>الشيعة الإثنا عشرية</item>
+        <item>جامعة العلوم الإسلامية بكراتشي</item>
+        <item>الجمعية الإسلامية لأمريكا الشمالية</item>
+        <item>رابطة العالم الإسلامي</item>
+        <item>جامعة أم القرى</item>
+        <item>الهيئة المصرية العامة للمساحة</item>
+        <item>معهد فيزياء الأرض بجامعة طهران</item>
+    </string-array>
+
+    <string-array name="preference_values_school">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="preference_entries_school">
+        <item>المذهب الشافعي</item>
+        <item>المذهب الحنفي</item>
+    </string-array>
+
+    <string-array name="preference_values_latitude">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="preference_entries_latitude">
+        <item>منتصف الليل</item>
+        <item>سبع الليل</item>
+        <item>حسب الزاوية</item>
+    </string-array>
+
+</resources>

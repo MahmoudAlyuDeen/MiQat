@@ -7,7 +7,7 @@ android {
     buildToolsVersion "24.0.0"
 
     defaultConfig {
-        applicationId "afterapps.meeqat"
+        applicationId "afterapps.miqat"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
@@ -15,7 +15,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -35,7 +36,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.matthew-tamlin:sliding-intro-screen:3.2.0'
     compile('com.mikepenz:aboutlibraries:5.8.1@aar') {
         transitive = true
     }
@@ -43,4 +43,5 @@ dependencies {
     compile 'com.mikepenz:weather-icons-typeface:2.0.10.2@aar'
     compile 'com.zsoltsafrany:needle:1.0.0'
     compile 'com.mikepenz:fontawesome-typeface:4.6.0.3@aar'
+    compile 'com.android.support:cardview-v7:24.2.1'
 }

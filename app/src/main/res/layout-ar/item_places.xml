@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_places_item_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:minHeight="?attr/listPreferredItemHeight">
+
+    <android.support.v7.widget.AppCompatRadioButton
+        android:id="@+id/item_places_radio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:clickable="false"
+        android:focusable="false" />
+
+    <ImageView
+        android:id="@+id/item_places_item_delete_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/listPreferredItemHeight"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:src="@drawable/ic_delete"
+        android:tint="@color/colorPrimary"
+        tools:ignore="ContentDescription" />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/places_item_name_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/item_places_radio_button"
+        android:layout_toLeftOf="@id/item_places_item_delete_icon"
+        android:layout_toRightOf="@id/item_places_radio_button"
+        android:layout_toStartOf="@id/item_places_item_delete_icon"
+        android:ellipsize="end"
+        android:gravity="right"
+        android:text="@string/placeholder"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:ignore="RtlHardcoded" />
+
+</RelativeLayout>

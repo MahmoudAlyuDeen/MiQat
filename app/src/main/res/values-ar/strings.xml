@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ميقات</string>
+    <string name="action_add">إضافة</string>
+    <string name="action_location">الموقع</string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="activity_title_location">الموقع</string>
+    <string name="add_location_message">يتم حساب مواقيت الصلاة حسب موقعك الجغرافي والتوقيت المحلي لهذا الموقع،يمكنك تغيير طريقة الحساب والمذهب الإسلامى في أي وقت من الإعدادات.\n\n
+حرصا على خصوصيتك، ميقات لن يطلب منك أبدا استخدام موقع جهازك. يمكنك الضغط على أيقونة الموقع لتختر موقعك</string>
+    <string name="app_bar_title">يتبقى</string>
+    <string name="asr">العصر</string>
+    <string name="dhuhr">الظهر</string>
+    <string name="fajr">الفجر</string>
+    <string name="intro_definition">الميقات هو ما وُقِتَ به، أي حُدِدَ من زمان. وقيل هو زمن العبادة ومكانها.</string>
+    <string name="isha">العشاء</string>
+    <string name="maghrib">المغرب</string>
+    <string name="next_prayer_subtitle_text_view">حتى %1$s</string>
+    <string name="no_prayers_message">مواقيت الصلاة غير متاحة، تأكد من وجود اتصال انترنت.</string>
+    <string name="place_deletion_message">تم مسح %1$s</string>
+    <string name="preference_dialog_title_latitude">إختر طريقة الحساب</string>
+    <string name="preference_dialog_title_method">إختر طريقة الحساب</string>
+    <string name="preference_dialog_title_school">إختر المذهب</string>
+    <string name="preference_summary_latitude">طريقة تقسيم الليل في أقصى شمال وجنوب الأرض</string>
+    <string name="preference_summary_method">طريقة حساب مواقيت الصلاة</string>
+    <string name="preference_summary_school">المذهب المتبع لحساب ميقات العصر</string>
+    <string name="preference_title_latitude">طريقة تقسيم الليل</string>
+    <string name="preference_title_method">طريقة الحساب</string>
+    <string name="preference_title_school">المذهب</string>
+    <string name="preferences_title_acknowledgement">هذا البرنامج يعمل بفضل</string>
+    <string name="preferences_title_prayer_timings">مواقيت الصلاة</string>
+    <string name="schedule_title">المواقيت</string>
+    <string name="shurouq">الشروق</string>
+    <string name="sunrise" />
+    <string name="sunset" />
+    <string name="noon" />
+    <string name="night" />
+    <string name="dawn" />
+    <string name="afternoon" />
+    <string name="reverse_geo_error">لم تتم إضافة الموقع، وقت النظام غير مضبوط بشكل صحيح</string>
+    <string name="preference_title_libraries">مكتبات البرمجيات</string>
+    <string name="preference_title_api">مصدر المواقيت</string>
+    <string name="noun_subtitle">اسم</string>
+    <string name="sub_header_today">صلوات اليوم</string>
+    <string name="sub_header_tomorrow">صلوات الغد</string>
+    <string name="action_add_location">إضافة موقع</string>
+    <string name="intro_location_card_title">كيف يعمل ميقات</string>
+    <string name="preference_title_design">تصميم المسجد من Starline - FreePik.com</string>
+</resources>

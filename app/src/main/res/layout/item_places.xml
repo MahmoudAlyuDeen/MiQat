@@ -17,8 +17,7 @@
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:clickable="false"
-        android:focusable="false"
-        android:theme="@style/MyRadioButton" />
+        android:focusable="false" />
 
     <ImageView
         android:id="@+id/item_places_item_delete_icon"
@@ -37,7 +36,7 @@
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/places_item_name_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@id/item_places_radio_button"
@@ -45,7 +44,9 @@
         android:layout_toRightOf="@id/item_places_radio_button"
         android:layout_toStartOf="@id/item_places_item_delete_icon"
         android:ellipsize="end"
+        android:gravity="left"
         android:text="@string/placeholder"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        tools:ignore="RtlHardcoded" />
 
 </RelativeLayout>

@@ -16,15 +16,16 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:titleTextColor="@color/app_bar_main_text">
+            app:theme="@style/ToolbarTheme"
+            app:titleTextColor="@color/activity_title">
 
             <ProgressBar
                 android:id="@+id/places_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="@dimen/toolbar_progress_margin"
                 android:layout_marginBottom="@dimen/toolbar_progress_margin"
+                android:layout_marginTop="@dimen/toolbar_progress_margin"
                 android:visibility="gone" />
 
         </android.support.v7.widget.Toolbar>

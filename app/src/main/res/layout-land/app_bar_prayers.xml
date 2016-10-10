@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:titleTextColor="@color/app_bar_main_text">
+        app:theme="@style/ToolbarTheme"
+        app:titleTextColor="@color/activity_title">
 
     </android.support.v7.widget.Toolbar>
 
@@ -20,15 +21,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:ignore="RtlSymmetry">
+        android:paddingTop="@dimen/basic_padding"
+        tools:ignore="RtlHardcoded,RtlSymmetry">
 
         <LinearLayout
             android:id="@+id/next_prayer_view_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical"
+            tools:ignore="RelativeOverlap,RtlHardcoded">
 
             <TextView
                 android:id="@+id/next_prayer_title_text_view"
@@ -49,9 +51,10 @@
             <TextView
                 android:id="@+id/next_prayer_subtitle_text_view"
                 style="@style/Base.TextAppearance.AppCompat.Subhead"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
+                android:gravity="left"
                 android:textColor="@color/app_bar_secondary_text" />
 
         </LinearLayout>
@@ -60,26 +63,26 @@
             android:id="@+id/mosque_anchor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:text="@string/mosque_anchor"
             android:textColor="@color/mosque_anchor"
             android:textSize="@dimen/text_size_next_prayer"
-            tools:ignore="RelativeOverlap" />
+            tools:ignore="RelativeOverlap,RtlHardcoded" />
 
         <RelativeLayout
             android:id="@+id/mosque_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_toEndOf="@id/mosque_anchor"
-            android:layout_toRightOf="@id/mosque_anchor"
-            android:gravity="end">
+            android:layout_toLeftOf="@id/mosque_anchor"
+            android:gravity="right"
+            tools:ignore="RtlHardcoded">
 
             <ImageView
                 android:id="@+id/mosque_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="right"
                 android:adjustViewBounds="true"
                 android:src="@drawable/mosque_white"
                 tools:ignore="ContentDescription" />
