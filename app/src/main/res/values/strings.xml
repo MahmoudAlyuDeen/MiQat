@@ -15,7 +15,7 @@
     <string name="dawn">The dawn prayer</string>
     <string name="sunrise">Sunrise</string>
     <string name="noon">The noon prayer</string>
-    <string name="afternoon">The Afternoon prayer</string>
+    <string name="afternoon">The afternoon prayer</string>
     <string name="sunset">The sunset prayer</string>
     <string name="night">The night prayer</string>
     <string name="next_prayer_subtitle_text_view">Till <b>%1$s</b></string>
@@ -40,14 +40,14 @@
     <string name="preference_summary_latitude">Method for adjusting times for higher latitudes</string>
     <string name="preference_title_latitude">Latitude adjustment method</string>
     <string name="preference_key_libraries" translatable="false">preferenceKeyLibraries</string>
-    <string name="preferences_title_acknowledgement">Acknowledgement</string>
+    <string name="preferences_title_acknowledgement">Acknowledgements</string>
     <string name="action_settings">Settings</string>
     <string name="preference_default_method" translatable="false">5</string>
     <string name="preference_default_school" translatable="false">0</string>
     <string name="preference_default_latitude" translatable="false">3</string>
-    <string name="add_location_message">Prayer timings are calculated using your geographical location and timezone,
-        calculation method and Islamic school can be changed anytime in settings.
-        \n\nTap the location icon anytime to update your location</string>
+    <string name="add_location_message">Prayer timings are calculated using your geographical location, timezone,
+        method and Islamic school. All of which can be changed anytime in settings.
+        \n\nWith your privacy in mind, MiQat will never access your location, you can tap the location icon anytime to update your location</string>
     <string name="reverse_geo_error">Can\'t add location; system time is not set correctly</string>
     <string name="preference_title_libraries">Open source libraries</string>
     <string name="preference_key_api" translatable="false">preferenceKeyApi</string>
@@ -56,4 +56,9 @@
     <string name="noun_subtitle">noun</string>
     <string name="sub_header_today">Today</string>
     <string name="sub_header_tomorrow">Tomorrow</string>
+    <string name="action_add_location">ADD LOCATION</string>
+    <string name="intro_example" translatable="false">إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا <b>مَّوْقُوتًا</b></string>
+    <string name="intro_location_card_title">How MiQat works</string>
+    <string name="preference_key_design" translatable="false">preferenceKeyDesign</string>
+    <string name="preference_title_design">Mosque art by Starline - Freepik.com</string>
 </resources>

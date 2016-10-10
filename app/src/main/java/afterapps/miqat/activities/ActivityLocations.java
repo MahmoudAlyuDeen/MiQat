@@ -40,7 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ActivityLocations extends AppCompatActivity {
 
     private static final String GEO_LOG_TAG = "GeoLog";
-    private static final int PLACES_FAB_FLAG = 1;
+    private static final int PLACES_FLAG = 1;
     @BindView(R.id.places_parent)
     View parent;
     @BindView(R.id.places_recycler)
@@ -87,6 +87,13 @@ public class ActivityLocations extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (getIntent().getBooleanExtra(ActivityPrayers.LOCATIONS_FIRST_TIME_KEY, false)) {
+            launchGooglePlacesFragment();
+        }
+    }
 
     private void initPlacesRecycler() {
         placesRecyclerAdapter = new PlacesRecyclerAdapter(this,
@@ -107,17 +114,7 @@ public class ActivityLocations extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.action_add:
-                try {
-                    AutocompleteFilter autocompleteFilter = new AutocompleteFilter.Builder()
-                            .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES).build();
-                    Intent intent =
-                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
-                                    .setFilter(autocompleteFilter)
-                                    .build(ActivityLocations.this);
-                    startActivityForResult(intent, PLACES_FAB_FLAG);
-                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
-                    Snackbar.make(parent, R.string.play_services_error, Snackbar.LENGTH_LONG).show();
-                }
+                launchGooglePlacesFragment();
                 return true;
 
             default:
@@ -126,9 +123,23 @@ public class ActivityLocations extends AppCompatActivity {
         }
     }
 
+    private void launchGooglePlacesFragment() {
+        try {
+            AutocompleteFilter autocompleteFilter = new AutocompleteFilter.Builder()
+                    .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES).build();
+            Intent intent =
+                    new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+                            .setFilter(autocompleteFilter)
+                            .build(ActivityLocations.this);
+            startActivityForResult(intent, PLACES_FLAG);
+        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+            Snackbar.make(parent, R.string.play_services_error, Snackbar.LENGTH_LONG).show();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PLACES_FAB_FLAG && resultCode == RESULT_OK) {
+        if (requestCode == PLACES_FLAG && resultCode == RESULT_OK) {
             Place place = PlaceAutocomplete.getPlace(this, data);
             handlePlaceSuccess(place);
         }

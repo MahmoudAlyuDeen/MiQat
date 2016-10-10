@@ -6,7 +6,7 @@
     <string name="action_settings">الإعدادات</string>
     <string name="activity_title_location">الموقع</string>
     <string name="add_location_message">يتم حساب مواقيت الصلاة حسب موقعك الجغرافي والتوقيت المحلي لهذا الموقع،يمكنك تغيير طريقة الحساب والمذهب الإسلامى في أي وقت من الإعدادات.\n\n
-    اضغط على أيقونة الموقع لتختار موقعك</string>
+حرصا على خصوصيتك، ميقات لن يطلب منك أبدا استخدام موقع جهازك. يمكنك الضغط على أيقونة الموقع لتختر موقعك</string>
     <string name="app_bar_title">يتبقى</string>
     <string name="asr">العصر</string>
     <string name="dhuhr">الظهر</string>
@@ -42,4 +42,7 @@
     <string name="noun_subtitle">اسم</string>
     <string name="sub_header_today">صلوات اليوم</string>
     <string name="sub_header_tomorrow">صلوات الغد</string>
+    <string name="action_add_location">إضافة موقع</string>
+    <string name="intro_location_card_title">كيف يعمل ميقات</string>
+    <string name="preference_title_design">تصميم المسجد من Starline - FreePik.com</string>
 </resources>

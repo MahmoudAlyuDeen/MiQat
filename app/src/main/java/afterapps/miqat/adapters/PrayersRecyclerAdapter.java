@@ -68,25 +68,25 @@ public class PrayersRecyclerAdapter extends RealmRecyclerViewAdapter<RealmObject
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         MyViewHolder holder = (MyViewHolder) viewHolder;
         boolean upNext = false;
-        int viewType = getItemViewType(position);
-        switch (viewType) {
-            case VIEW_TYPE_WITH_TITLE:
-                holder.divider.setVisibility(View.GONE);
-                if (holder.subheaderTextView != null) {
-                    holder.subheaderTextView.setText(context.getString(R.string.sub_header_today));
-                }
-                break;
-            case VIEW_TYPE_WITH_TITLE_TOMORROW:
-                if (holder.dayDivider != null) {
-                    holder.divider.setVisibility(View.GONE);
-                }
-                if (holder.subheaderTextView != null) {
-                    holder.subheaderTextView.setText(context.getString(R.string.sub_header_tomorrow));
-                }
-                break;
-        }
         if (getData() != null) {
             RealmObjectPrayer prayer = getData().get(position);
+            int viewType = getItemViewType(position);
+            switch (viewType) {
+                case VIEW_TYPE_WITH_TITLE:
+                    holder.divider.setVisibility(View.GONE);
+                    if (holder.subheaderTextView != null) {
+                        holder.subheaderTextView.setText(Utilities.todayOrTomorrow(context, prayer.getDay()));
+                    }
+                    break;
+                case VIEW_TYPE_WITH_TITLE_TOMORROW:
+                    if (holder.dayDivider != null) {
+                        holder.divider.setVisibility(View.GONE);
+                    }
+                    if (holder.subheaderTextView != null) {
+                        holder.subheaderTextView.setText(Utilities.todayOrTomorrow(context, prayer.getDay()));
+                    }
+                    break;
+            }
             if (nextPrayer != null && prayer.getPrayerID() == nextPrayer.getPrayerID()) {
                 holder.prayerNameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
                 holder.prayerEnglishNameTextView.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));

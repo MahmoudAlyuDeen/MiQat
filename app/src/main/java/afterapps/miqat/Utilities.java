@@ -183,4 +183,10 @@ public class Utilities {
             }
         });
     }
+
+    public static String todayOrTomorrow(Context context, int day) {
+        if (day == Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
+            return context.getString(R.string.sub_header_today);
+        else return context.getString(R.string.sub_header_tomorrow);
+    }
 }

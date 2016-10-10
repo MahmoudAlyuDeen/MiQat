@@ -67,6 +67,10 @@ public class ActivityPrayers extends AppCompatActivity {
     ImageView animatingImageView;
     @BindView(R.id.mosque_image_view)
     ImageView mosqueImageView;
+    @BindView(R.id.add_location_text_view)
+    View addLocation;
+
+    public static final String LOCATIONS_FIRST_TIME_KEY = "firstTimeKey";
 
     private FragmentPrayersContent scheduleFragment;
 
@@ -119,6 +123,18 @@ public class ActivityPrayers extends AppCompatActivity {
         lastDisplayedIcon = 0;
         realm = Realm.getDefaultInstance();
         setupRetryListener();
+        setupAddLocation();
+    }
+
+    private void setupAddLocation() {
+        addLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityPrayers.this, ActivityLocations.class);
+                intent.putExtra(LOCATIONS_FIRST_TIME_KEY, true);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupRetryListener() {
@@ -485,6 +501,7 @@ public class ActivityPrayers extends AppCompatActivity {
 
             case R.id.action_location:
                 Intent intent = new Intent(this, ActivityLocations.class);
+                intent.putExtra(LOCATIONS_FIRST_TIME_KEY, false);
                 startActivity(intent);
                 return true;
 
